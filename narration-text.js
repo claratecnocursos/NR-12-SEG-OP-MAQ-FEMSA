@@ -17,10 +17,9 @@
   // "100%" vira extenso para a voz não ler "por cento" errado.
   var HOME_TEXT = [
     'Abertura do treinamento.',
-    'NR 17, Ergonomia no Comércio e na Logística.',
-    'Aprenda a identificar riscos e aplicar, na prática, a postura correta',
-    'em cada função do dia a dia da loja.',
-    'São cinco módulos, com conteúdo completo, em treinamento cem por cento online.'
+    'NR-12, Segurança no Trabalho em Máquinas e Equipamentos.',
+    'Requisitos Técnicos, Proteções e Prevenção de Riscos em Máquinas e Equipamentos.',
+    'São quatro módulos completos, em treinamento cem por cento online.'
   ].join(' ');
 
   function stripHtml(value) {

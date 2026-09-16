@@ -407,7 +407,64 @@
     return { move: move, tags: tags, caveat: caveat };
   }
 
+  function hazardMapHTML(data) {
+    var links = Array.isArray(data.links) ? data.links : [];
+    var rows = links.map(function (it, i) {
+      return `<button type="button" class="qs-hazard-row" data-qs-hazard="${i}">
+        <span class="qs-hazard-cell is-danger">
+          ${it.icon ? `<span class="qs-hazard-ico" aria-hidden="true">${esc(it.icon)}</span>` : ''}
+          <b>${esc(it.perigo || '')}</b>
+        </span>
+        <span class="qs-hazard-arrow" aria-hidden="true">
+          <svg viewBox="0 0 52 24" fill="none">
+            <path d="M4 12h36"/>
+            <path d="M32 5l12 7-12 7"/>
+          </svg>
+        </span>
+        <span class="qs-hazard-cell is-risk">
+          ${it.riscoIcon ? `<span class="qs-hazard-ico" aria-hidden="true">${esc(it.riscoIcon)}</span>` : ''}
+          <b>${esc(it.risco || '')}</b>
+        </span>
+      </button>`;
+    }).join('');
+    return `
+      <article class="qs-screen is-content is-text is-hazard" data-qs-root data-type="content">
+        <div class="qs-panel qs-panel-text qs-panel-hazard">
+          <h2 class="qs-title">${esc(data.title || '')}</h2>
+          ${data.body ? `<p class="qs-hazard-lead">${esc(data.body)}</p>` : ''}
+          <div class="qs-hazard-legend" aria-hidden="true">
+            <span class="is-danger">Perigo</span>
+            <span class="qs-hazard-x">×</span>
+            <span class="is-risk">Risco</span>
+          </div>
+          <div class="qs-hazard-map">${rows}</div>
+          <p class="qs-hazard-caption" data-qs-hazard-cap>Toque em um par para ler a explicação.</p>
+          ${data.quote ? `<blockquote class="qs-quote">${esc(data.quote)}</blockquote>` : ''}
+        </div>
+      </article>`;
+  }
+
+  function figureHTML(data) {
+    return `
+      <article class="qs-screen is-content is-figure" data-qs-root data-type="content">
+        <header class="qs-figure-head">
+          <h2 class="qs-title">${esc(data.title || '')}</h2>
+          ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
+        </header>
+        <div class="qs-figure-media">
+          ${mediaHTML(data, { contain: true })}
+        </div>
+        ${data.quote ? `<blockquote class="qs-quote qs-figure-quote">${esc(data.quote)}</blockquote>` : ''}
+      </article>`;
+  }
+
   function contentHTML(data) {
+    if (Array.isArray(data.links) && data.links.length) {
+      return hazardMapHTML(data);
+    }
+    if (data.layout === 'figure' && data.image) {
+      return figureHTML(data);
+    }
     var hasImg = !!data.image;
     var rulesCount = Array.isArray(data.rules) ? data.rules.length : 0;
     var normCompact = !!(data.compact || (hasImg && rulesCount > 0));
@@ -773,6 +830,7 @@
     if (type === 'order') this._bindOrder();
     if (type === 'match') this._bindMatch();
     if (type === 'content' && this.data && this.data.steps) this._bindSteps();
+    if (type === 'content' && this.data && this.data.links) this._bindHazard();
 
     if ((type === 'question' || type === 'order') && this.options.quizScoring) {
       if (this.root) this.root.classList.add('is-timed');
@@ -1074,6 +1132,21 @@
     });
     var tap = root.querySelector('[data-qs-reveal]');
     if (tap) tap.addEventListener('click', function () { reveal(tap); });
+  };
+
+  QuestionScreen.prototype._bindHazard = function () {
+    var rows = this.el.querySelectorAll('[data-qs-hazard]');
+    var cap = this.el.querySelector('[data-qs-hazard-cap]');
+    var links = (this.data && this.data.links) || [];
+    rows.forEach(function (row) {
+      row.addEventListener('click', function () {
+        rows.forEach(function (r) { r.classList.remove('is-on'); });
+        row.classList.add('is-on');
+        var i = Number(row.getAttribute('data-qs-hazard'));
+        if (cap && links[i] && links[i].note) cap.textContent = links[i].note;
+        beep('click');
+      });
+    });
   };
 
   QuestionScreen.prototype._bindCompare = function () {

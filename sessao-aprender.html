@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
-  <title>NR 17 — Trilha da Ergonomia</title>
+  <title>NR-12 — Segurança no Trabalho em Máquinas e Equipamentos</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=mob40">
+  <link rel="stylesheet" href="question-screen.css?v=femsa-blue26">
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; }
   </style>
@@ -18,20 +18,17 @@
       <div class="qs-home-photo" aria-hidden="true">
         <img class="qs-home-photo-img" id="homePhotoImg" src="assets/fotos/capa.png" alt="">
         <div class="qs-home-veil"></div>
-        <div class="qs-home-screen-fx" id="homeScreenFx">
-          <img class="qs-home-screen-logo" id="homeScreenLogo" src="assets/fotos/logo-bounce.png" alt="Leroy Merlin">
-        </div>
       </div>
       <div class="qs-home-inner">
         <div class="qs-home-card">
           <div class="qs-home-tag">SEGURANÇA DO TRABALHO</div>
-          <h1><em>NR 17</em> —<br>Ergonomia no Comércio e na Logística</h1>
-          <p>Aprenda a identificar riscos e aplicar, na prática, a postura correta em cada função do dia a dia da loja.</p>
+          <h1><em>NR-12</em> —<br>Segurança no Trabalho em Máquinas e Equipamentos</h1>
+          <p>Requisitos Técnicos, Proteções e Prevenção de Riscos em Máquinas e Equipamentos</p>
           <div class="qs-home-badges">
             <div class="qs-home-badge">
               <div>
-                <strong>5 Módulos</strong>
-                <span>Conteúdo completo</span>
+                <strong>4 Módulos</strong>
+                <span>Completos</span>
               </div>
             </div>
             <div class="qs-home-badge">
@@ -56,7 +53,7 @@
       </div>
       <div class="qs-wave" aria-hidden="true">
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path d="M0,55 C480,10 960,90 1440,40 L1440,100 L0,100 Z" fill="rgba(255, 64, 72, 0.07)" />
+          <path d="M0,55 C480,10 960,90 1440,40 L1440,100 L0,100 Z" fill="rgba(255, 122, 26, 0.10)" />
         </svg>
       </div>
     </section>
@@ -111,7 +108,7 @@
 
     <div class="qs-wave qs-wave-session" id="sessionWave" aria-hidden="true" hidden>
       <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,55 C480,10 960,90 1440,40 L1440,100 L0,100 Z" fill="rgba(255, 64, 72, 0.07)" />
+        <path d="M0,55 C480,10 960,90 1440,40 L1440,100 L0,100 Z" fill="rgba(255, 122, 26, 0.10)" />
       </svg>
     </div>
   </div>
@@ -120,6 +117,7 @@
   <div class="qs-tut-overlay" id="tutorialModal" hidden>
     <div class="qs-tut-card" role="dialog" aria-modal="true" aria-labelledby="tutTitle">
       <div class="qs-tut-accent" aria-hidden="true"></div>
+      <button type="button" class="qs-tut-x" id="btnTutorialX" aria-label="Fechar tutorial">×</button>
       <div class="qs-tut-badge">▶ TUTORIAL</div>
       <h2 id="tutTitle">Antes de começar — <span>Orientações iniciais</span></h2>
       <p>Assista ao vídeo para entender como navegar pelos módulos, responder às atividades e usar as ferramentas.</p>
@@ -149,9 +147,9 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=mob40"></script>
-  <script src="question-screen.js?v=mob40"></script>
-  <script src="narration-text.js?v=mob40"></script>
+  <script src="question-screen-data.js?v=nr12-14"></script>
+  <script src="question-screen.js?v=mob43"></script>
+  <script src="narration-text.js?v=nr12-2"></script>
   <script src="narration.js?v=mob40"></script>
   <script>
 (function () {
@@ -371,11 +369,70 @@
     }
   }
 
-  /* O progresso vive só na memória: os módulos vão se liberando durante a
-     visita, mas recarregar a página recomeça da abertura. A linha abaixo
-     limpa o que as versões anteriores tinham deixado salvo no navegador. */
+  /* Progresso e página atual ficam no navegador, para o F5 continuar de onde parou. */
+  var RESUME_KEY = 'nr12-sessao-aprender-resume';
+  var resumeBusy = false;
   var progress = { unlockedUpTo: 0, completed: {} };
   try { localStorage.removeItem('nr17-sessao-aprender-resume'); } catch (err) {}
+
+  function saveResume() {
+    if (resumeBusy) return;
+    try {
+      localStorage.setItem(RESUME_KEY, JSON.stringify({
+        v: 1,
+        page: currentGlobalPage(),
+        progress: {
+          unlockedUpTo: progress.unlockedUpTo,
+          completed: progress.completed
+        },
+        answered: answered,
+        sessionAnswers: sessionAnswers,
+        quizState: quizState,
+        showingResult: showingResult
+      }));
+    } catch (err) {}
+  }
+
+  function loadResume() {
+    try {
+      var raw = localStorage.getItem(RESUME_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || data.v !== 1 || !data.page) return null;
+      if (data.page < 1 || data.page > catalog.length) return null;
+      return data;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function applyResume(data) {
+    resumeBusy = true;
+    if (data.progress) {
+      progress.unlockedUpTo = Number(data.progress.unlockedUpTo) || 0;
+      progress.completed = data.progress.completed || {};
+    }
+    var savedAnswered = data.answered || {};
+    var savedSession = data.sessionAnswers || {};
+    var savedQuiz = data.quizState || quizState;
+    var savedShowing = !!data.showingResult;
+
+    if (data.page <= 1) {
+      showHome();
+    } else {
+      jumpToPage(data.page);
+      answered = savedAnswered;
+      sessionAnswers = savedSession;
+      quizState = savedQuiz;
+      if (savedShowing) showQuizResult();
+      else {
+        updateNav();
+        updatePtsChip();
+      }
+    }
+    resumeBusy = false;
+    saveResume();
+  }
 
   var demoMode = false;
   try { demoMode = sessionStorage.getItem('nr17-demoMode') === '1'; } catch (err) {}
@@ -395,6 +452,7 @@
     if (modIndex + 1 < modules.length) {
       progress.unlockedUpTo = Math.max(progress.unlockedUpTo, modIndex + 1);
     }
+    saveResume();
   }
 
   // módulo disponível agora; 0 quando todos já foram concluídos
@@ -448,7 +506,7 @@
   var brandTxt = null;
   var bgMusic = document.getElementById('bg-music');
 
-  if (brandTxt) brandTxt.textContent = (session.meta && session.meta.title) || 'NR 17';
+  if (brandTxt) brandTxt.textContent = (session.meta && session.meta.title) || 'NR-12';
   if (bgMusic) {
     bgMusic.src = (session.meta && session.meta.musicSrc) || 'musica/musica_foco.mp3';
     bgMusic.volume = 0.35;
@@ -475,6 +533,7 @@
     renderProgress();
     syncJumpUI();
     if (window.Narration) Narration.pageChanged();
+    saveResume();
   }
 
   function currentMod() { return modules[modIndex]; }
@@ -683,12 +742,12 @@
     clearAutoAdvance();
     resetQuizState();
     if (qs) { qs.destroy(); qs = null; }
-    if (brandTxt) brandTxt.textContent = (session.meta && session.meta.title) || 'NR 17';
+    if (brandTxt) brandTxt.textContent = (session.meta && session.meta.title) || 'NR-12';
     setChrome(true);
     var callout = menuCallout();
     shell.innerHTML =
       '<div class="qs-menu">' +
-        '<h1>NR 17 — Trilha da Ergonomia</h1>' +
+        '<h1>NR-12 — Segurança no Trabalho em Máquinas e Equipamentos</h1>' +
         '<p class="qs-menu-lead">Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo.</p>' +
         '<div class="qs-start-callout" role="status">' +
           '<strong>' + callout.title + '</strong>' +
@@ -721,6 +780,7 @@
     syncJumpUI();
     revelarModuloLiberado();
     if (window.Narration) Narration.pageChanged();
+    saveResume();
   }
 
   /* No celular a trilha não cabe inteira: a lista começa no Módulo 1 e o
@@ -996,6 +1056,7 @@
       time: s.time || 40,
       onSelect: function (result) {
         answered[s.id] = true;
+        saveResume();
         if (quizState.active && isQuizStep(s) && !s.opinion) {
           var pts = (result && result.points) || 0;
           sessionAnswers[s.id] = { pts: pts, correct: !!(result && result.correct) };
@@ -1033,6 +1094,7 @@
     updatePtsChip();
     syncJumpUI();
     if (window.Narration) Narration.pageChanged();
+    saveResume();
   }
 
   function go(delta) {
@@ -1104,6 +1166,7 @@
   document.getElementById('btnStartHome').addEventListener('click', function () { sfx('click'); showMenu(); });
   document.getElementById('btnTutorialHome').addEventListener('click', openTutorial);
   document.getElementById('btnTutorialClose').addEventListener('click', closeTutorial);
+  document.getElementById('btnTutorialX').addEventListener('click', closeTutorial);
   document.getElementById('tutorialModal').addEventListener('click', function (e) {
     if (e.target === this) closeTutorial();
   });
@@ -1354,70 +1417,9 @@
     }
   });
 
-  /* Logo Leroy na tela do monitor da capa (como na referência) */
-  (function () {
-    var home = document.getElementById('home');
-    var photoWrap = home && home.querySelector('.qs-home-photo');
-    var photoImg = document.getElementById('homePhotoImg');
-    var screenFx = document.getElementById('homeScreenFx');
-    var logo = document.getElementById('homeScreenLogo');
-    if (!home || !photoWrap || !photoImg || !screenFx || !logo) return;
-
-    var SCREEN = { left: 0.8336, top: 0.2604, right: 0.9813, bottom: 0.4299 };
-    var boxW = 0, boxH = 0;
-
-    function layout() {
-      var cw = photoWrap.clientWidth, ch = photoWrap.clientHeight;
-      var nw = photoImg.naturalWidth, nh = photoImg.naturalHeight;
-      if (!cw || !ch || !nw || !nh) return;
-      var scale = Math.max(cw / nw, ch / nh);
-      var rw = nw * scale, rh = nh * scale;
-      var offX = cw - rw;
-      var offY = (ch - rh) / 2;
-      var sx = offX + SCREEN.left * rw;
-      var sy = offY + SCREEN.top * rh;
-      var sw = (SCREEN.right - SCREEN.left) * rw;
-      var sh = (SCREEN.bottom - SCREEN.top) * rh;
-      screenFx.style.left = sx + 'px';
-      screenFx.style.top = sy + 'px';
-      screenFx.style.width = sw + 'px';
-      screenFx.style.height = sh + 'px';
-      boxW = sw; boxH = sh;
-    }
-
-    if (photoImg.complete && photoImg.naturalWidth) layout();
-    photoImg.addEventListener('load', layout);
-    window.addEventListener('resize', function () {
-      clearTimeout(window.__homeScreenLt);
-      window.__homeScreenLt = setTimeout(layout, 120);
-    });
-    if (window.ResizeObserver) new ResizeObserver(layout).observe(photoWrap);
-
-    var px = 6, py = 6, vx = 42, vy = 31, last = null;
-    function isActive() {
-      return !home.hidden && document.visibilityState === 'visible';
-    }
-    function frame(ts) {
-      requestAnimationFrame(frame);
-      if (!boxW || !boxH) layout();
-      if (!isActive() || !boxW || !boxH) { last = ts; return; }
-      if (last == null) { last = ts; return; }
-      var dt = Math.min((ts - last) / 1000, 0.05);
-      last = ts;
-      var lw = logo.offsetWidth, lh = logo.offsetHeight;
-      if (!lw || !lh) return;
-      px += vx * dt; py += vy * dt;
-      var maxX = boxW - lw, maxY = boxH - lh;
-      if (px < 0) { px = 0; vx = Math.abs(vx); }
-      else if (px > maxX) { px = maxX; vx = -Math.abs(vx); }
-      if (py < 0) { py = 0; vy = Math.abs(vy); }
-      else if (py > maxY) { py = maxY; vy = -Math.abs(vy); }
-      logo.style.transform = 'translate(' + px + 'px,' + py + 'px)';
-    }
-    requestAnimationFrame(frame);
-  })();
-
-  showHome();
+  var resume = loadResume();
+  if (resume && resume.page > 1) applyResume(resume);
+  else showHome();
 })();
   </script>
 </body>

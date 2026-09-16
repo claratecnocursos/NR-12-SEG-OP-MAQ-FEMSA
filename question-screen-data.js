@@ -1,5 +1,5 @@
 /**
- * Conteúdo da Trilha da Ergonomia — NR 17
+ * Conteúdo da Trilha NR-12 — Segurança no Trabalho em Máquinas e Equipamentos
  * Tipos: cover | content | video | image | quiz-intro | question
  * Atividades (question) só no FINAL de cada módulo — precedidas por quiz-intro.
  *
@@ -8,93 +8,153 @@
  */
 window.QUESTION_SCREEN_SESSION = {
   meta: {
-    title: "NR 17 — Ergonomia",
+    title: "NR-12 — Máquinas e Equipamentos",
     brand: "TecnoCursos",
     musicSrc: "musica/musica_foco.mp3"
   },
   modules: [
     {
       id: 1,
-      title: "Fundamentos da Ergonomia",
-      meta: "Vídeos + reflexão · 4 perguntas no final",
+      title: "Fundamentos da NR-12, Escopo e Mapeamento de Zonas de Perigo",
+      meta: "5 vídeos + ícones · 4 perguntas no final",
       titleUnlock: {
-        title: "DETETIVE DA POSTURA",
-        body: "Você já começou a enxergar o trabalho com um novo olhar.",
-        icon: "🕵️"
+        title: "MAPEADOR DE PERIGO",
+        body: "Você já reconhece o alcance da NR-12 e sabe identificar zonas de perigo.",
+        icon: "🛡️"
       },
       screens: [
         {
           id: "m1-cover",
           type: "cover",
-          title: "Módulo 1 — Fundamentos da Ergonomia",
-          subtitle: "Como a ergonomia protege sua saúde no dia a dia da loja.",
+          title: "Módulo 1 — Fundamentos da NR-12, Escopo e Mapeamento de Zonas de Perigo",
+          subtitle: "Compreender a fundamentação legal da NR-12, aplicabilidade e o mapeamento de zonas de perigo.",
           image: "assets/fotos/capa-modulo1.png",
-          transcript: "Módulo 1: Fundamentos da Ergonomia."
+          transcript: "Módulo 1: Fundamentos da NR-12, escopo e mapeamento de zonas de perigo."
         },
         {
-          id: "m1-reflexao",
-          type: "reflect",
-          kicker: "💭 Reflexão",
-          title: "Antes de começar",
-          prompt: "Você já pensou na sua",
-          promptAccent: "postura hoje?",
-          answer: "O segredo está na postura correta. Ao longo deste módulo você vai entender como aplicá-la em cada função do chão de loja.",
-          transcript: "Antes de começar: pense na sua postura de hoje."
-        },
-        {
-          id: "m1-v-oque",
+          id: "m1-v-conceito",
           type: "video",
-          kicker: "🎥 Vídeo",
-          title: "O que é Ergonomia",
-          duration: "0:45",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=b082f8d3-96d7-472c-a2e0-b94f546cfac0",
-          playerId: "panda-b082f8d3-96d7-472c-a2e0-b94f546cfac0",
-          scene: "Cena a filmar na área de vendas da loja",
-          brief: "Colaborador uniformizado caminha pausadamente por um corredor da área de vendas, observando as prateleiras. Estica o braço com naturalidade para alcançar um item em altura confortável. Cena silenciosa, narração em off.",
-          body: "Do grego ergon (trabalho) e nomos (lei/regra) — a ciência que adapta o trabalho às pessoas.",
-          transcript: "Vídeo: o que é ergonomia."
+          kicker: "🎥 Vídeo 1",
+          title: "Conceito, Objetivos e Abrangência da NR-12",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=2512625b-185a-41cb-82bd-da6bd6e5c287",
+          playerId: "panda-2512625b-185a-41cb-82bd-da6bd6e5c287",
+          scene: "Título da norma na tela, com ícones do ciclo de vida da máquina",
+          brief: "Apresentar o que é a NR-12, seus objetivos e o alcance em todas as fases: projeto, fabricação, importação, comercialização, uso e cessão — em máquinas novas e usadas.",
+          transcript: "Vídeo: conceito, objetivos e abrangência da NR-12."
         },
         {
-          id: "m1-v-porque",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Por que a Ergonomia importa",
-          duration: "1:20",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=8506ca2f-7b5d-4e72-a851-4e8da13ba198",
-          playerId: "panda-8506ca2f-7b5d-4e72-a851-4e8da13ba198",
-          scene: "Cena a filmar em diferentes setores da loja",
-          brief: "Sequência real: reposição de prateleira, operadora de caixa, colaborador com paleteira. Close no desconforto nas costas e na correção da postura. Narração explica o risco de LER/DORT.",
-          transcript: "Vídeo: por que a ergonomia importa — risco de LER/DORT."
-        },
-        {
-          id: "m1-v-seg",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Ergonomia e Segurança do Trabalho",
-          duration: "0:35",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=2563b3f0-7419-493d-92e4-90c419508d80",
-          playerId: "panda-2563b3f0-7419-493d-92e4-90c419508d80",
-          scene: "Cena a filmar no depósito da loja",
-          brief: "Colaborador caminha pelo depósito passando por sinalização de segurança e extintor, com luvas. Mensagem: Segurança do Trabalho e ergonomia caminham juntas.",
-          transcript: "Vídeo: ergonomia e segurança do trabalho."
-        },
-        {
-          id: "m1-areas",
+          id: "m1-ciclo",
           type: "content",
-          kicker: "📄 Texto",
-          title: "As 3 áreas da Ergonomia",
+          kicker: "📄 Ícones",
+          title: "O ciclo de vida da máquina",
+          body: "A NR-12 vale em todas as fases — não só na operação do dia a dia.",
           cards: [
-            { icon: "💪", title: "Física", body: "Anatomia, fisiologia, biomecânica e antropometria. Envolve postura, movimentos repetitivos, manuseio de materiais e LER/DORT." },
-            { icon: "🧩", title: "Organizacional", body: "Trabalho em grupo, tempo de trabalho, processos comunicativos, projetos participativos, gestão de qualidade." },
-            { icon: "🧠", title: "Cognitiva", body: "Tomada de decisões, confiabilidade humana, estresse, carga mental, interação com a máquina." }
+            { icon: "📐", title: "Projeto", body: "Os requisitos de segurança começam no desenho da máquina." },
+            { icon: "🏭", title: "Fabricação", body: "A construção precisa nascer com proteções e distâncias corretas." },
+            { icon: "⚙️", title: "Uso no chão de fábrica", body: "Operação, manutenção e intervenção seguem a mesma norma." },
+            { icon: "🛒", title: "Comercialização", body: "Importação, venda e cessão a qualquer título também entram no alcance." }
           ],
-          quote: "O sistema de ossos, tendões, músculos e ligamentos permite movimentos amplos e coordenação motora fina, mas com resistência pequena — por isso grandes resistências (carga e peso) devem ser feitas por máquinas e carrinhos, não pelo corpo.",
-          transcript: "Três áreas: física, organizacional e cognitiva."
+          quote: "A NR-12 protege a saúde e a integridade física, prevenindo acidentes e doenças do trabalho — e vale para máquinas novas e usadas.",
+          transcript: "Ciclo de vida: projeto, fabricação, uso no chão de fábrica e comercialização."
+        },
+        {
+          id: "m1-v-isencoes",
+          type: "video",
+          kicker: "🎥 Vídeo 2",
+          title: "Onde a NR-12 não se aplica",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=e73f25a8-ff58-4cfd-83af-27c6cadee690",
+          playerId: "panda-e73f25a8-ff58-4cfd-83af-27c6cadee690",
+          scene: "Paleteira manual, eletrodomésticos e selo INMETRO",
+          brief: "Mostrar hipóteses de isenção: força humana ou animal, equipamentos estáticos, ferramentas portáteis com norma tipo C, eletrodomésticos e máquinas certificadas pelo INMETRO.",
+          transcript: "Vídeo: onde a NR-12 não se aplica."
+        },
+        {
+          id: "m1-v-perigo",
+          type: "video",
+          kicker: "🎥 Vídeo 3",
+          title: "A diferença entre perigo e risco",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=3d867064-154f-44a0-9698-390a22c6a317",
+          playerId: "panda-3d867064-154f-44a0-9698-390a22c6a317",
+          scene: "Diagrama: perigo como estado e risco quando há exposição",
+          brief: "Distinguir perigo (potencial de dano) de risco (exposição ao perigo). Citar riscos mecânicos: esmagamento, corte, cisalhamento, enroscamento e arrasto.",
+          transcript: "Vídeo: a diferença entre perigo e risco."
+        },
+        {
+          id: "m1-perigo-risco",
+          type: "content",
+          kicker: "📄 Mapa",
+          title: "Perigo não é a mesma coisa que risco",
+          body: "Cada perigo gera um risco. Toque em um par para ler a explicação.",
+          links: [
+            {
+              icon: "🪜",
+              perigo: "Altura",
+              risco: "Queda",
+              riscoIcon: "⬇️",
+              note: "A altura é o perigo. A queda é o risco — surge quando alguém se expõe."
+            },
+            {
+              icon: "🔥",
+              perigo: "Superfície quente",
+              risco: "Queimadura",
+              riscoIcon: "♨️",
+              note: "A superfície quente é o perigo. A queimadura é o risco da exposição."
+            },
+            {
+              icon: "⛽",
+              perigo: "Tanque de combustível",
+              risco: "Explosão",
+              riscoIcon: "💥",
+              note: "O tanque é o perigo. A explosão é o risco quando há exposição."
+            }
+          ],
+          quote: "Perigo é a condição com potencial de dano. Risco surge quando existe exposição.",
+          transcript: "Perigo gera risco: altura e queda, superfície quente e queimadura, tanque de combustível e explosão."
+        },
+        {
+          id: "m1-v-zonas",
+          type: "video",
+          kicker: "🎥 Vídeo 4",
+          title: "Riscos mecânicos e zonas de perigo na prática",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=79ff381f-d222-42c7-8079-9d9b22ab3d4a",
+          playerId: "panda-79ff381f-d222-42c7-8079-9d9b22ab3d4a",
+          scene: "Serra circular com lâmina exposta e torno sem barreira de usinagem",
+          brief: "Definir zona de perigo e mostrar não conformidades: serra circular desprotegida e torno mecânico sem barreira física.",
+          transcript: "Vídeo: riscos mecânicos e zonas de perigo na prática."
+        },
+        {
+          id: "m1-malhas",
+          type: "content",
+          layout: "figure",
+          kicker: "📄 Números",
+          title: "Item 12.5.1.1 — distâncias mínimas",
+          body: "A abertura da malha define a distância até a zona de perigo.",
+          image: "assets/fotos/m1-p10.png",
+          imageAlt: "Distâncias mínimas conforme a malha: 850 mm, 120 mm e 80 mm",
+          imageFit: "contain",
+          quote: "Quanto maior o furo da grade, mais longe ela precisa estar do ponto perigoso.",
+          transcript: "Distâncias mínimas: 850 milímetros, 120 milímetros e 80 milímetros, conforme a malha."
+        },
+        {
+          id: "m1-v-dedos",
+          type: "video",
+          kicker: "🎥 Vídeo 5",
+          title: "Prevenção contra o acesso involuntário de dedos e mãos",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=ebd78427-77a0-4a24-80cc-e906cfb791e9",
+          playerId: "panda-ebd78427-77a0-4a24-80cc-e906cfb791e9",
+          scene: "Teste de fresta com símbolo de REPROVADO ao penetrar o dedo",
+          brief: "Se o dedo atravessa a carenagem e alcança engrenagem ou ponto de esmagamento, o equipamento está reprovado. Fecha o Módulo 1 e antecipa o Módulo 2.",
+          transcript: "Vídeo: prevenção contra o acesso involuntário de dedos e mãos."
         },
         {
           id: "m1-quiz-intro",
           type: "quiz-intro",
-          title: "Desafio NR 17 — Módulo 1",
+          title: "Desafio NR-12 — Módulo 1",
           count: 4,
           minCorrect: 3,
           icon: "🎮",
@@ -103,68 +163,68 @@ window.QUESTION_SCREEN_SESSION = {
         {
           id: "m1-q1",
           type: "question",
-          question: "Qual é a origem da palavra \"Ergonomia\"?",
+          question: "Qual é o objetivo principal da NR-12?",
           image: "assets/fotos/m1=p1.png",
           alternatives: [
-            { id: "a", text: "Latim, \"força e lei\"", correct: false },
-            { id: "b", text: "Grego, \"ergon\" (trabalho) e \"nomos\" (lei, regra)", correct: true },
-            { id: "c", text: "Inglês, \"energy norms\"", correct: false },
-            { id: "d", text: "Não tem origem definida", correct: false }
+            { id: "a", text: "Aumentar a produtividade da linha de produção", correct: false },
+            { id: "b", text: "Proteger a saúde e a integridade física, prevenindo acidentes e doenças do trabalho", correct: true },
+            { id: "c", text: "Padronizar a cor e a marca das máquinas", correct: false },
+            { id: "d", text: "Substituir o uso de EPIs em qualquer operação", correct: false }
           ],
-          explanation: "Ergonomia vem do grego: ergon (trabalho) + nomos (lei/regra).",
-          review: "A origem e o significado da palavra Ergonomia",
+          explanation: "A NR-12 define requisitos para o manuseio e a operação segura, com o objetivo de proteger a saúde e a integridade física.",
+          review: "O objetivo principal da NR-12",
           transcript: "Atividade final do módulo 1 — pergunta 1."
         },
         {
           id: "m1-q2",
           type: "question",
-          question: "Qual das opções NÃO é uma das três áreas da ergonomia?",
+          question: "Qual opção NÃO se aplica à NR-12?",
           image: "assets/fotos/m1=p2.png",
           alternatives: [
-            { id: "a", text: "Física", correct: false },
-            { id: "b", text: "Organizacional", correct: false },
-            { id: "c", text: "Cognitiva", correct: false },
-            { id: "d", text: "Financeira", correct: true }
+            { id: "a", text: "Serra circular de bancada", correct: false },
+            { id: "b", text: "Torno mecânico industrial", correct: false },
+            { id: "c", text: "Paleteira manual movida por força humana", correct: true },
+            { id: "d", text: "Prensa mecânica", correct: false }
           ],
-          explanation: "As três áreas são física, organizacional e cognitiva.",
-          review: "Quais são as 3 áreas da Ergonomia",
+          explanation: "Equipamentos movidos por força humana ou animal, como a paleteira manual, estão isentos da NR-12.",
+          review: "O que fica fora do alcance da NR-12",
           transcript: "Pergunta 2 do módulo 1."
         },
         {
           id: "m1-q3",
           type: "question",
-          question: "Grandes resistências (carga e peso) devem ser realizadas por quê?",
+          question: "Qual é a diferença entre perigo e risco?",
           image: "assets/fotos/m1=p3.png",
           alternatives: [
-            { id: "a", text: "Somente pela força do trabalhador", correct: false },
-            { id: "b", text: "Por máquinas e carrinhos", correct: true },
-            { id: "c", text: "Por qualquer colaborador disponível", correct: false },
-            { id: "d", text: "Não há recomendação", correct: false }
+            { id: "a", text: "São a mesma coisa, só muda o nome", correct: false },
+            { id: "b", text: "Perigo é o estado com potencial de dano; risco surge quando há exposição", correct: true },
+            { id: "c", text: "Risco só existe em máquinas novas", correct: false },
+            { id: "d", text: "Perigo só existe depois que o acidente acontece", correct: false }
           ],
-          explanation: "Use máquinas e carrinhos — o corpo não é feito para grandes cargas contínuas.",
-          review: "Quem deve assumir as grandes cargas e resistências",
+          explanation: "A lâmina é o perigo. A mão do operador perto dela, sem proteção, cria o risco de corte.",
+          review: "A diferença entre perigo e risco",
           transcript: "Pergunta 3 do módulo 1."
         },
         {
           id: "m1-q4",
           type: "question",
-          question: "O que é Segurança do Trabalho, segundo o treinamento?",
+          question: "Para uma malha de 50 × 200 mm, qual é a distância mínima de segurança até a zona de perigo?",
           image: "assets/fotos/m1=p4.png",
           alternatives: [
-            { id: "a", text: "Cuida da proteção e da integridade da vida do trabalhador", correct: true },
-            { id: "b", text: "Um departamento que só existe em fábricas", correct: false },
-            { id: "c", text: "Sinônimo exato de ergonomia, sem diferença", correct: false },
-            { id: "d", text: "Uma norma que não se aplica ao comércio", correct: false }
+            { id: "a", text: "80 mm", correct: false },
+            { id: "b", text: "120 mm", correct: false },
+            { id: "c", text: "850 mm", correct: true },
+            { id: "d", text: "200 mm", correct: false }
           ],
-          explanation: "Segurança do Trabalho protege a vida e a integridade do trabalhador.",
-          review: "O conceito de Segurança do Trabalho",
+          explanation: "Item 12.5.1.1: malha 50 × 200 mm exige 850 mm de distância. Quanto maior a abertura, maior a distância.",
+          review: "As distâncias mínimas de segurança conforme a malha",
           transcript: "Pergunta 4 — fim do módulo 1."
         }
       ]
     },
     {
       id: 2,
-      title: "Movimentação Manual de Cargas",
+      title: "Proteções de Máquinas, Sistemas de Intertravamento e Meios de Acesso",
       meta: "Vídeos + imagens · 4 cenários no final",
       titleUnlock: {
         title: "GUARDIÃO DAS CARGAS",
@@ -175,10 +235,10 @@ window.QUESTION_SCREEN_SESSION = {
         {
           id: "m2-cover",
           type: "cover",
-          title: "Módulo 2 — Movimentação de Cargas",
-          subtitle: "Levantar, transportar e guardar mercadorias sem prejudicar a coluna.",
+          title: "Módulo 2 — Proteções de Máquinas, Sistemas de Intertravamento e Meios de Acesso",
+          subtitle: "Especificar e inspecionar proteções físicas, intertravamento, rearme e meios de acesso.",
           image: "assets/fotos/m2-p1.png",
-          transcript: "Módulo 2: movimentação manual de cargas."
+          transcript: "Módulo 2: proteções de máquinas, sistemas de intertravamento e meios de acesso."
         },
         {
           id: "m2-v-levantamento",
@@ -346,7 +406,7 @@ window.QUESTION_SCREEN_SESSION = {
     },
     {
       id: 3,
-      title: "Posturas e Riscos Biomecânicos",
+      title: "Intervenções Seguras, Bloqueio de Energias (LOTO) e Permissão de Trabalho",
       meta: "Vídeos + conteúdo · 5 V/F no final",
       titleUnlock: {
         title: "LEITOR DO CORPO",
@@ -357,10 +417,10 @@ window.QUESTION_SCREEN_SESSION = {
         {
           id: "m3-cover",
           type: "cover",
-          title: "Módulo 3 — Posturas e Riscos",
-          subtitle: "Limites do corpo e riscos biomecânicos da função.",
+          title: "Módulo 3 — Intervenções Seguras, Bloqueio de Energias (LOTO) e Permissão de Trabalho",
+          subtitle: "Protocolos de manutenção, LOTO e Permissão de Trabalho.",
           image: "assets/fotos/m3-p1.png",
-          transcript: "Módulo 3: posturas e riscos biomecânicos."
+          transcript: "Módulo 3: intervenções seguras, bloqueio de energias LOTO e permissão de trabalho."
         },
         {
           id: "m3-v-pe",
@@ -514,7 +574,7 @@ window.QUESTION_SCREEN_SESSION = {
     },
     {
       id: 4,
-      title: "Ergonomia em Áreas Administrativas",
+      title: "Diagnóstico Prático no Chão de Fábrica, Anexos Setoriais e Conscientização",
       meta: "Vídeos + conteúdo · ordenar a rotina no final",
       titleUnlock: {
         title: "AJUSTADOR DO POSTO",
@@ -525,10 +585,10 @@ window.QUESTION_SCREEN_SESSION = {
         {
           id: "m4-cover",
           type: "cover",
-          title: "Módulo 4 — Áreas Administrativas",
-          subtitle: "Ajustes simples no posto evitam horas de desconforto.",
+          title: "Módulo 4 — Diagnóstico Prático no Chão de Fábrica, Anexos Setoriais e Conscientização",
+          subtitle: "Auditorias visuais, anexos da NR-12 e cultura preventiva.",
           image: "assets/fotos/m4-p1.png",
-          transcript: "Módulo 4: ergonomia em áreas administrativas."
+          transcript: "Módulo 4: diagnóstico prático no chão de fábrica, anexos setoriais e conscientização."
         },
         {
           id: "m4-v-monitor",
