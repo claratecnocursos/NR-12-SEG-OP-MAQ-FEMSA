@@ -110,6 +110,14 @@
     list(screen.cards).forEach(function (c) {
       parts.push(labelled(c.title, c.body));
     });
+    // exploração por abas: a voz lê os pontos na ordem em que estão na tela
+    list(screen.spots).forEach(function (s) {
+      parts.push(labelled(s.title, s.body));
+    });
+    // pilha de fotos: a legenda de cada foto, na ordem do baralho
+    list(screen.stack).forEach(function (s) {
+      parts.push(sentence(s.caption || s.imageAlt));
+    });
     list(screen.items).forEach(function (it) {
       parts.push(labelled(it.title, it.text || it.body));
     });
@@ -168,7 +176,7 @@
 
     /* Ordenar e associar embaralham os itens a cada exibição, e os dados
        guardam a resposta certa: aqui vai só o enunciado. */
-    if (screen.type === 'order' || screen.type === 'match') {
+    if (screen.type === 'order' || screen.type === 'match' || screen.type === 'sort') {
       if (screen.title) parts.push(clean(screen.title) + '.');
       if (screen.body) parts.push(clean(stripHtml(screen.body)));
       return joinParts(parts);
@@ -212,16 +220,16 @@
   function buildMenuText(session, nextModule) {
     var mods = (session && session.modules) || [];
     var parts = [
-      'NR 17, Trilha da Ergonomia.',
-      'Conteúdo programático do treinamento.',
-      'As atividades ficam só no final de cada módulo.'
+      'NR-12, Segurança no Trabalho em Máquinas e Equipamentos.',
+      'Um módulo por vez. Ao concluir, o próximo é liberado.'
     ];
-    mods.forEach(function (m) {
-      parts.push('Módulo ' + m.id + ', ' + clean(m.title) + '.');
-    });
-    parts.push(nextModule
-      ? ('Módulo ' + nextModule + ' de ' + mods.length + ' liberado.')
-      : 'Treinamento concluído. Você finalizou todos os módulos.');
+    if (nextModule) {
+      var m = null;
+      mods.forEach(function (mod) { if (mod.id === nextModule) m = mod; });
+      parts.push('Módulo ' + nextModule + ' de ' + mods.length + (m ? ', ' + clean(m.title) : '') + '. Toque em iniciar módulo.');
+    } else {
+      parts.push('Treinamento concluído. Você pode revisar o módulo 1.');
+    }
     return parts.join(' ').replace(/\s+/g, ' ').trim();
   }
 

@@ -6,7 +6,7 @@
   <meta name="referrer" content="no-referrer">
   <title>NR-12 — Segurança no Trabalho em Máquinas e Equipamentos</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=femsa-blue26">
+  <link rel="stylesheet" href="question-screen.css?v=femsa-blue41">
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; }
   </style>
@@ -147,9 +147,9 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=nr12-14"></script>
-  <script src="question-screen.js?v=mob43"></script>
-  <script src="narration-text.js?v=nr12-2"></script>
+  <script src="question-screen-data.js?v=nr12-45"></script>
+  <script src="question-screen.js?v=mob53"></script>
+  <script src="narration-text.js?v=nr12-6"></script>
   <script src="narration.js?v=mob40"></script>
   <script>
 (function () {
@@ -188,6 +188,7 @@
           s.type === 'compare' ? 'Compare' :
           s.type === 'order' ? 'Ordenar' :
           s.type === 'match' ? 'Associação' :
+          s.type === 'sort' ? 'Inspeção' :
           s.type === 'finale' ? 'Conclusão' :
           s.type
         )
@@ -217,7 +218,7 @@
   var sessionAnswers = {};
   var PTS_MAX = 50;
   function isScoreType(type) {
-    return type === 'question' || type === 'order' || type === 'match';
+    return type === 'question' || type === 'order' || type === 'match' || type === 'sort';
   }
   function isGateType(type) {
     return isScoreType(type) || type === 'reflect' || type === 'compare';
@@ -373,6 +374,8 @@
   var RESUME_KEY = 'nr12-sessao-aprender-resume';
   var resumeBusy = false;
   var progress = { unlockedUpTo: 0, completed: {} };
+  var menuFocus = 0;
+  var lastPlayedIndex = -1;
   try { localStorage.removeItem('nr17-sessao-aprender-resume'); } catch (err) {}
 
   function saveResume() {
@@ -381,6 +384,8 @@
       localStorage.setItem(RESUME_KEY, JSON.stringify({
         v: 1,
         page: currentGlobalPage(),
+        menuFocus: menuFocus,
+        lastPlayedIndex: lastPlayedIndex,
         progress: {
           unlockedUpTo: progress.unlockedUpTo,
           completed: progress.completed
@@ -408,6 +413,8 @@
 
   function applyResume(data) {
     resumeBusy = true;
+    if (typeof data.menuFocus === 'number') menuFocus = data.menuFocus;
+    if (typeof data.lastPlayedIndex === 'number') lastPlayedIndex = data.lastPlayedIndex;
     if (data.progress) {
       progress.unlockedUpTo = Number(data.progress.unlockedUpTo) || 0;
       progress.completed = data.progress.completed || {};
@@ -448,6 +455,7 @@
 
   function completeCurrentModule() {
     if (modIndex < 0) return;
+    lastPlayedIndex = modIndex;
     progress.completed[String(modIndex)] = true;
     if (modIndex + 1 < modules.length) {
       progress.unlockedUpTo = Math.max(progress.unlockedUpTo, modIndex + 1);
@@ -455,12 +463,10 @@
     saveResume();
   }
 
-  // módulo disponível agora; 0 quando todos já foram concluídos
+  // módulo visível no menu; 0 quando a trilha já acabou
   function nextModuleNumber() {
-    for (var i = 0; i < modules.length; i++) {
-      if (isUnlocked(i) && !isCompleted(i)) return modules[i].id;
-    }
-    return 0;
+    var m = modules[menuFocus];
+    return m ? m.id : 0;
   }
 
   function menuCallout() {
@@ -547,7 +553,7 @@
 
   function exitPlay() {
     if (isFinale()) showHome();
-    else showMenu();
+    else showMenu(Math.max(0, modIndex));
   }
 
   function renderProgress() {
@@ -585,7 +591,7 @@
     }
     if (mode === 'menu') {
       btnBack.disabled = false;
-      btnFwd.disabled = true;
+      btnFwd.disabled = menuFocus >= lastMenuIndex();
       return;
     }
     if (mode !== 'play') {
@@ -620,7 +626,7 @@
   function showQuizResult() {
     clearAutoAdvance();
     showingResult = true;
-    var total = quizState.total || quizState.answered || 1;
+    var total = Math.max(Number(quizState.total) || 0, Number(quizState.answered) || 0, 1);
     var hits = quizState.correct;
     var min = quizState.minCorrect || Math.ceil(total * 0.75);
     quizState.passed = hits >= min;
@@ -691,8 +697,9 @@
     var next = slideIndex + 1;
     while (next < list.length && isScoreType(list[next].type)) next++;
     if (next >= list.length) {
+      var fechado = (modIndex >= 0 ? modIndex : lastPlayedIndex);
       completeCurrentModule();
-      showMenu();
+      showMenuAfterModule(fechado);
       return;
     }
     slideIndex = next;
@@ -715,6 +722,10 @@
 
   function advance() {
     clearAutoAdvance();
+    if (mode === 'menu') {
+      menuStep(1);
+      return;
+    }
     if (showingResult) {
       if (quizState.passed || demoMode) finishAfterQuiz();
       return;
@@ -725,18 +736,60 @@
       return;
     }
     if (slideIndex >= screens().length - 1) {
+      var fechado = (modIndex >= 0 ? modIndex : lastPlayedIndex);
       completeCurrentModule();
       if (isFinale()) {
         updateNav();
         return;
       }
-      showMenu();
+      showMenuAfterModule(fechado);
       return;
     }
     go(1);
   }
 
-  function showMenu() {
+  function lastMenuIndex() {
+    if (demoMode) return modules.length - 1;
+    return Math.min(progress.unlockedUpTo, modules.length - 1);
+  }
+
+  function clampMenuIndex(i) {
+    if (i == null || i < 0) return 0;
+    var cap = lastMenuIndex();
+    if (i > cap) return cap;
+    return i;
+  }
+
+  /* A trilha é sequencial. Não procura o primeiro módulo incompleto — isso
+     pulava o 3 e o 4 já feitos e jogava a pessoa no 5. */
+  function activeMenuIndex() {
+    if (menuFocus >= 0 && menuFocus < modules.length) return clampMenuIndex(menuFocus);
+    if (lastPlayedIndex >= 0) return clampMenuIndex(lastPlayedIndex);
+    return 0;
+  }
+
+  /* Ao terminar o módulo N o menu para em N+1, mesmo que N+1 já tenha sido feito. */
+  function nextMenuIndex(fromIndex) {
+    var from = fromIndex;
+    if (from == null || from < 0) from = lastPlayedIndex;
+    if (from >= 0 && from + 1 < modules.length) return clampMenuIndex(from + 1);
+    if (from >= 0) return clampMenuIndex(from);
+    return activeMenuIndex();
+  }
+
+  function showMenuAfterModule(fromIndex) {
+    showMenu(nextMenuIndex(fromIndex));
+  }
+
+  // no menu as setas andam um módulo por vez, para a trilha seguir em ordem
+  function menuStep(delta) {
+    var alvo = menuFocus + delta;
+    if (alvo < 0) { showHome(); return; }
+    if (alvo > lastMenuIndex()) return;
+    showMenu(alvo);
+  }
+
+  function showMenu(focusIndex) {
     mode = 'menu';
     modIndex = -1;
     clearAutoAdvance();
@@ -744,41 +797,47 @@
     if (qs) { qs.destroy(); qs = null; }
     if (brandTxt) brandTxt.textContent = (session.meta && session.meta.title) || 'NR-12';
     setChrome(true);
-    var callout = menuCallout();
+    var i = (focusIndex != null && focusIndex >= 0 && focusIndex < modules.length)
+      ? focusIndex
+      : activeMenuIndex();
+    i = clampMenuIndex(i);
+    menuFocus = i;
+    var m = modules[i] || modules[0];
+    var allDone = modules.every(function (_, idx) { return isCompleted(idx); });
+    var reviewing = allDone || isCompleted(i);
+    var cta = reviewing ? 'Revisar módulo' : 'Iniciar módulo';
+    var kicker = (allDone && i === 0)
+      ? 'Treinamento concluído'
+      : 'Você está aqui';
+    var lead = allDone
+      ? 'Você finalizou os módulos. Toque para revisar o Módulo 1.'
+      : 'Um módulo por vez. Ao concluir, o próximo é liberado.';
+    var dots = modules.map(function (_, idx) {
+      var cls = 'qs-mod-dot';
+      if (idx === i && !allDone) cls += ' is-on';
+      else if (isCompleted(idx)) cls += ' is-done';
+      return '<span class="' + cls + '" aria-hidden="true"></span>';
+    }).join('');
     shell.innerHTML =
-      '<div class="qs-menu">' +
-        '<h1>NR-12 — Segurança no Trabalho em Máquinas e Equipamentos</h1>' +
-        '<p class="qs-menu-lead">Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo.</p>' +
-        '<div class="qs-start-callout" role="status">' +
-          '<strong>' + callout.title + '</strong>' +
-          '<span>' + callout.body + '</span>' +
-        '</div>' +
-        '<div class="qs-mod-grid">' +
-          modules.map(function (m, i) {
-            var locked = !isUnlocked(i);
-            var done = isCompleted(i);
-            var cls = locked ? ' is-locked' : (done ? ' is-done' : ' is-open is-pulse');
-            var statusLabel = locked ? 'Bloqueado' : (done ? 'Concluído' : (i === 0 ? 'Começar' : 'Continuar'));
-            var statusCls = locked ? 'qs-lock' : (done ? 'qs-done' : 'qs-go');
-            var meta = locked
-              ? ('Conclua o Módulo ' + modules[i - 1].id + ' para liberar')
-              : (done ? 'Toque para revisar' : 'Disponível agora');
-            return '<button type="button" class="qs-mod-card' + cls + '"' +
-              ' data-mod="' + i + '"' +
-              (locked ? ' disabled aria-disabled="true"' : '') +
-              '>' +
-              '<div class="qs-mod-num">' + m.id + '</div>' +
-              '<strong class="qs-mod-title">' + m.title + '</strong>' +
-              '<span class="qs-mod-meta">' + meta + '</span>' +
-              '<em class="' + statusCls + '">' + statusLabel + '</em>' +
-            '</button>';
-          }).join('') +
-        '</div>' +
+      '<div class="qs-menu is-single">' +
+        '<p class="qs-menu-brand">NR-12 — Segurança no Trabalho em Máquinas e Equipamentos</p>' +
+        '<p class="qs-menu-lead">' + lead + '</p>' +
+        '<article class="qs-mod-focus">' +
+          '<div class="qs-mod-kicker">' + kicker + '</div>' +
+          '<div class="qs-mod-hero">' +
+            '<span class="qs-mod-big">' + String(m.id).padStart(2, '0') + '</span>' +
+            '<span class="qs-mod-now">Módulo ' + m.id + '<small>de ' + modules.length + '</small></span>' +
+          '</div>' +
+          '<h2 class="qs-mod-title">' + m.title + '</h2>' +
+          (m.objective ? '<p class="qs-mod-goal">' + m.objective + '</p>' : '') +
+          (m.meta ? '<p class="qs-mod-meta">' + m.meta + '</p>' : '') +
+          '<button type="button" class="qs-mod-start" data-mod="' + i + '">' + cta + '</button>' +
+        '</article>' +
+        '<div class="qs-mod-dots" aria-hidden="true">' + dots + '</div>' +
       '</div>';
     renderProgress();
     updateNav();
     syncJumpUI();
-    revelarModuloLiberado();
     if (window.Narration) Narration.pageChanged();
     saveResume();
   }
@@ -825,6 +884,8 @@
     resetQuizState();
     setChrome(true);
     modIndex = i;
+    lastPlayedIndex = i;
+    menuFocus = i;
     slideIndex = 0;
     answered = {};
     mode = 'play';
@@ -861,6 +922,7 @@
       type === 'compare' ? 'Compare' :
       type === 'order' ? 'Ordenar' :
       type === 'match' ? 'Associação' :
+      type === 'sort' ? 'Inspeção' :
       type === 'finale' ? 'Conclusão' :
       type || 'Tela'
     );
@@ -904,7 +966,7 @@
     var item = catalog[n - 1];
     if (!item) return false;
     if (item.view === 'home') { showHome(); return true; }
-    if (item.view === 'menu') { showMenu(); return true; }
+    if (item.view === 'menu') { showMenu(menuFocus); return true; }
     /* O pulo atravessa o bloqueio dos módulos, então libera o caminho até ali:
        sem isso o menu mostraria como trancado o módulo em que a pessoa está. */
     progress.unlockedUpTo = Math.max(progress.unlockedUpTo, item.mi);
@@ -929,6 +991,8 @@
     answered = {};
     setChrome(true);
     modIndex = mi;
+    lastPlayedIndex = mi;
+    menuFocus = mi;
     slideIndex = si;
     mode = 'play';
     if (brandTxt) brandTxt.textContent = 'Módulo ' + currentMod().id;
@@ -982,9 +1046,17 @@
     var globalPos = globalN ? (globalN + ' / ' + globalTotal) : ('— / ' + globalTotal);
     var chip = document.getElementById('pageChip');
     if (chip) {
-      chip.hidden = !globalTotal || !globalN;
-      chip.textContent = globalN ? (globalN + ' / ' + globalTotal) : '0 / 0';
-      chip.title = 'Página do treinamento (total)';
+      if (mode !== 'play' || modIndex < 0) {
+        chip.hidden = true;
+      } else {
+        var list = screens();
+        var total = list.length || 1;
+        var n = Math.min(total, (slideIndex | 0) + 1);
+        if (showingResult) n = total;
+        chip.hidden = false;
+        chip.textContent = n + ' / ' + total;
+        chip.title = 'Tela do módulo';
+      }
     }
     var posEl = document.getElementById('simJumpPos');
     if (posEl) posEl.textContent = globalPos;
@@ -1048,6 +1120,12 @@
       };
     }
 
+    if (s.type === 'sort' && Array.isArray(s.items) && s.items.length) {
+      quizState.total = s.items.length;
+      if (s.minCorrect != null) quizState.minCorrect = Number(s.minCorrect);
+      quizState.active = true;
+    }
+
     if (qs) qs.destroy();
     qs = QuestionScreen.mount(shell, payload, {
       quizScoring: quizState.active && isQuizStep(s) && !s.opinion,
@@ -1060,18 +1138,30 @@
         if (quizState.active && isQuizStep(s) && !s.opinion) {
           var pts = (result && result.points) || 0;
           sessionAnswers[s.id] = { pts: pts, correct: !!(result && result.correct) };
-          quizState.answered += 1;
-          if (result && result.correct) {
-            quizState.correct += 1;
-            quizState.streak += 1;
-            quizState.bestStreak = Math.max(quizState.bestStreak, quizState.streak);
-            quizState.points += pts;
+          if (result && result.kind === 'sort' && result.total != null) {
+            quizState.answered = result.total;
+            quizState.total = result.total;
+            quizState.correct = result.hits || 0;
+            quizState.minCorrect = s.minCorrect != null ? Number(s.minCorrect) : Math.ceil(result.total * 0.75);
+            quizState.points = pts;
+            quizState.streak = result.correct ? 1 : 0;
+            quizState.bestStreak = quizState.streak;
             updateNav();
-            celebratePts(pts);
+            if (pts) celebratePts(pts);
           } else {
-            quizState.streak = 0;
-            updateNav();
-            updatePtsChip();
+            quizState.answered += 1;
+            if (result && result.correct) {
+              quizState.correct += 1;
+              quizState.streak += 1;
+              quizState.bestStreak = Math.max(quizState.bestStreak, quizState.streak);
+              quizState.points += pts;
+              updateNav();
+              celebratePts(pts);
+            } else {
+              quizState.streak = 0;
+              updateNav();
+              updatePtsChip();
+            }
           }
         } else {
           updateNav();
@@ -1082,7 +1172,7 @@
         autoAdvanceTimer = setTimeout(function () {
           if (isLastQuizQuestion()) showQuizResult();
           else go(1);
-        }, s.type === 'order' || s.type === 'match' ? 1600 : 3000);
+        }, s.type === 'order' || s.type === 'match' || s.type === 'sort' ? 1600 : 3000);
       },
       onContinue: handleContinue
     });
@@ -1099,7 +1189,7 @@
 
   function go(delta) {
     if (mode === 'menu') {
-      if (delta < 0) showHome();
+      menuStep(delta < 0 ? -1 : 1);
       return;
     }
     if (mode !== 'play') return;
@@ -1109,10 +1199,7 @@
       return;
     }
     if (delta < 0 && slideIndex <= 0) {
-      // trilha contínua: a volta atravessa os módulos em vez de parar no menu.
-      // Só o Módulo 1 devolve para a capa de abertura.
-      if (modIndex > 0) jumpToScreen(modIndex - 1, lastContentIndex(modIndex - 1));
-      else showHome();
+      showMenu(Math.max(0, modIndex));
       return;
     }
     if (delta > 0) {
@@ -1154,16 +1241,16 @@
   }
 
   shell.addEventListener('click', function (e) {
-    var card = e.target.closest('.qs-mod-card');
-    if (card) {
+    var start = e.target.closest('.qs-mod-start, .qs-mod-card');
+    if (start) {
       sfx('click');
-      openModule(+card.dataset.mod);
+      openModule(+start.dataset.mod);
     }
   });
 
   btnBack.addEventListener('click', function () { sfx('click'); go(-1); });
   btnFwd.addEventListener('click', function () { sfx('click'); advance(); });
-  document.getElementById('btnStartHome').addEventListener('click', function () { sfx('click'); showMenu(); });
+  document.getElementById('btnStartHome').addEventListener('click', function () { sfx('click'); showMenu(0); });
   document.getElementById('btnTutorialHome').addEventListener('click', openTutorial);
   document.getElementById('btnTutorialClose').addEventListener('click', closeTutorial);
   document.getElementById('btnTutorialX').addEventListener('click', closeTutorial);
@@ -1267,7 +1354,7 @@
     applyDemoUI();
     showSimToast(demoMode ? '🔓 Modo Simulação ATIVADO' : '🔒 Modo Simulação DESATIVADO');
     setJumpOpen(demoMode);
-    if (mode === 'menu') showMenu();
+    if (mode === 'menu') showMenu(menuFocus);
   }
 
   (function initDemoShortcut() {
@@ -1406,7 +1493,7 @@
       return;
     }
     if (mode === 'home') {
-      if (e.key === 'Enter') showMenu();
+      if (e.key === 'Enter') showMenu(0);
       return;
     }
     if (e.key === 'ArrowRight') { sfx('click'); advance(); }

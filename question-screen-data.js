@@ -16,6 +16,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       id: 1,
       title: "Fundamentos da NR-12, Escopo e Mapeamento de Zonas de Perigo",
+      objective: "Compreender a fundamentação legal da NR-12, a aplicabilidade e o mapeamento de zonas de perigo.",
       meta: "5 vídeos + ícones · 4 perguntas no final",
       titleUnlock: {
         title: "MAPEADOR DE PERIGO",
@@ -225,10 +226,11 @@ window.QUESTION_SCREEN_SESSION = {
     {
       id: 2,
       title: "Proteções de Máquinas, Sistemas de Intertravamento e Meios de Acesso",
-      meta: "Vídeos + imagens · 4 cenários no final",
+      objective: "Especificar e inspecionar barreiras físicas, intertravamento, rearme e meios de acesso permanentes.",
+      meta: "6 vídeos + ícones · inspeção no final",
       titleUnlock: {
-        title: "GUARDIÃO DAS CARGAS",
-        body: "Você sabe proteger a coluna ao levantar, transportar e guardar.",
+        title: "GUARDIÃO DAS PROTEÇÕES",
+        body: "Você especifica e inspeciona barreiras físicas, intertravamento, rearme e meios de acesso.",
         icon: "🛡️"
       },
       screens: [
@@ -236,357 +238,434 @@ window.QUESTION_SCREEN_SESSION = {
           id: "m2-cover",
           type: "cover",
           title: "Módulo 2 — Proteções de Máquinas, Sistemas de Intertravamento e Meios de Acesso",
-          subtitle: "Especificar e inspecionar proteções físicas, intertravamento, rearme e meios de acesso.",
+          subtitle: "Especificar e inspecionar barreiras físicas (fixas e móveis), dispositivos de intertravamento, rearme manual e meios de acesso permanentes.",
           image: "assets/fotos/m2-p1.png",
           transcript: "Módulo 2: proteções de máquinas, sistemas de intertravamento e meios de acesso."
         },
         {
-          id: "m2-v-levantamento",
+          id: "m2-v-requisitos",
           type: "video",
-          kicker: "🎥 Vídeo principal",
-          title: "Levantamento correto de cargas",
-          duration: "até 1:30",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=1d833ec5-6c59-4eb1-ac67-f9a8d22917ab",
-          playerId: "panda-1d833ec5-6c59-4eb1-ac67-f9a8d22917ab",
-          scene: "Cena a filmar no depósito da loja",
-          brief: "Comparação errado × certo: tronco curvado e pernas esticadas (errado); depois joelhos flexionados, carga perto do corpo, força nas pernas e giro com os pés (certo). Cena final: dois colaboradores erguendo caixa maior com luvas.",
-          transcript: "Vídeo: levantamento correto de cargas."
-        },
-        {
-          id: "m2-v-biomecanica",
-          type: "video",
-          kicker: "🎥 Vídeo · animação",
-          title: "O que acontece no corpo",
-          duration: "0:45",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=65d4d6a6-e931-4cbc-8b62-f95848364aaa",
-          playerId: "panda-65d4d6a6-e931-4cbc-8b62-f95848364aaa",
-          scene: "Animação estilo Pixar (aqui se justifica)",
-          brief: "Personagem curva o tronco para levantar; zoom na coluna e nos discos comprimindo até o risco de hérnia. Depois mostra o levantamento correto com coluna alinhada — biomecânica ocupacional.",
-          transcript: "Animação: o que acontece no corpo ao levantar errado."
-        },
-        {
-          id: "m2-v-paleteira",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Transporte com paleteira manual",
+          kicker: "🎥 Vídeo 1",
+          title: "Requisitos Gerais dos Sistemas de Segurança e Normas de Referência",
           duration: "1:00",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=ba2b0046-7403-4f9a-98d2-6a9f9a06a719",
-          playerId: "panda-ba2b0046-7403-4f9a-98d2-6a9f9a06a719",
-          scene: "Cena a filmar no corredor de estoque",
-          brief: "Colaborador empurra a paleteira: primeiro incorreto (tronco curvado, braços rígidos, olhando para baixo); depois correto (tronco ereto, cotovelos levemente flexionados, olhar à frente).",
-          transcript: "Vídeo: transporte com paleteira manual."
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=a0447a76-333d-4d97-8b30-2815b9612172",
+          playerId: "panda-a0447a76-333d-4d97-8b30-2815b9612172",
+          scene: "Capas das normas ABNT NBR ISO 12100, IEC 60204-1 e ABNT NBR 14153, e ilustração dos profissionais habilitado, qualificado e capacitado",
+          brief: "Item 12.5.2: seleção do sistema com apreciação de riscos, responsabilidade técnica, instalação por profissionais autorizados e integração ao comando da máquina.",
+          transcript: "Vídeo: requisitos gerais dos sistemas de segurança e normas de referência."
         },
         {
-          id: "m2-img-numeros",
+          id: "m2-profissionais",
           type: "content",
-          title: "NR 17.5 — os 3 números para memorizar",
-          image: "assets/fotos/nr175-pag16.png",
-          imageAlt: "Ilustração: os 3 números da NR 17.5 no estoque — 60 cm, 25 kg e 2 horas",
-          stats: [
-            { num: "60 cm", label: "distância máxima de pega" },
-            { num: "25 kg", label: "limite para transporte sozinho" },
-            { num: "2 horas", label: "intervalo máximo sem pausa" }
+          kicker: "📄 Ícones",
+          title: "Quem pode projetar e instalar",
+          body: "O sistema de segurança fica sob responsabilidade técnica e só é instalado por quem a empresa autorizar.",
+          cards: [
+            { icon: "📜", title: "Habilitado", body: "Profissional legalmente habilitado assume a responsabilidade técnica do projeto." },
+            { icon: "🎓", title: "Qualificado", body: "Formação reconhecida para executar a instalação com segurança." },
+            { icon: "🛠️", title: "Capacitado", body: "Treinado e autorizado pela empresa para a tarefa." },
+            { icon: "📚", title: "Normas de referência", body: "ISO 12100 (riscos), IEC 60204-1 (elétrica) e NBR 14153 (comandos de segurança)." }
           ],
-          rules: [
-            {
-              text: "Não exigir nem admitir transporte manual cujo peso comprometa a saúde ou segurança; reduzir a carga para mulher e trabalhador menor."
-            },
-            {
-              text: "Organizar pega e depósito para evitar flexões, extensões e rotações excessivas do tronco; cargas o mais próximo possível do corpo."
-            },
-            {
-              text: "É vedado o levantamento quando a distância horizontal da pega for superior a 60 cm."
-            }
-          ],
-          note: {
-            label: "Importante",
-            text: "Sozinho só até 25 kg. Acima disso: duas pessoas ou equipamento, com luvas."
-          },
-          transcript: "NR 17.5: 60 cm de pega, 25 kg sozinho e pausa a cada 2 horas."
+          quote: "O sistema deve dificultar a burla e paralisar movimentos perigosos se houver falha.",
+          transcript: "Profissionais habilitado, qualificado e capacitado, e normas de referência."
         },
         {
-          id: "m2-img-regras",
+          id: "m2-v-fixas",
+          type: "video",
+          kicker: "🎥 Vídeo 2",
+          title: "Proteções Fixas e Cuidados no Projeto de Barreiras",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=690955a5-ce60-4566-a15a-9c0bc4f6b5e4",
+          playerId: "panda-690955a5-ce60-4566-a15a-9c0bc4f6b5e4",
+          scene: "Esquema técnico de proteção fixa: parafusos, ponto de lubrificação, sem arestas cortantes e proteção perimetral de transmissões",
+          brief: "Item 12.5.4a e 12.5.9: proteção permanente ou presa por parafusos; transmissões enclausuradas; material resistente e lubrificação sem retirar a barreira.",
+          transcript: "Vídeo: proteções fixas e cuidados no projeto de barreiras."
+        },
+        {
+          id: "m2-v-moveis",
+          type: "video",
+          kicker: "🎥 Vídeo 3",
+          title: "Proteções Móveis e Dispositivos de Intertravamento",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=b5d0c587-204d-43f5-91d5-15a3f21f0973",
+          playerId: "panda-b5d0c587-204d-43f5-91d5-15a3f21f0973",
+          scene: "Tela de proteção amarela com chave de intertravamento em destaque",
+          brief: "Itens 12.5.4b, 12.5.6 a 12.5.8: proteção que abre sem ferramenta, com intertravamento simples ou com bloqueio quando há inércia.",
+          transcript: "Vídeo: proteções móveis e dispositivos de intertravamento."
+        },
+        {
+          id: "m2-protecao-fixa",
           type: "content",
-          title: "NR 17.5 — demais regras",
-          image: "assets/fotos/nr175-pag17.png",
-          imageAlt: "Ilustração: demais regras da NR 17.5 no depósito — paleteira, pausa, orientação e só cargas",
-          rules: [
-            {
-              text: "Impulsão/tração (vagonetes, carros de mão, paleteira) também deve observar carga, frequência, pega e distância."
-            },
-            {
-              text: "Prevenção: meios técnicos facilitadores, peso e tamanho adequados, pausas não superiores a 2 horas."
-            },
-            {
-              text: "Quem faz transporte manual não eventual deve receber orientação sobre os métodos corretos."
-            },
-            {
-              text: "Este capítulo não se aplica a levantamento, transporte e movimentação de pessoas — só de cargas."
-            }
-          ],
-          note: {
-            label: "Lembrete",
-            text: "Acima de 25 kg, use duas pessoas ou equipamento — e luvas."
-          },
-          transcript: "NR 17.5: impulsão e tração, pausas a cada 2 horas, orientação e só cargas — nunca pessoas."
-        },
-        {
-          id: "m2-img-equip",
-          type: "image",
-          kicker: "📷 Foto",
-          title: "Equipamentos de apoio da loja",
-          body: "Paleteira manual e carrinhos de carga. Acima de 25 kg: duas pessoas ou equipamento, com luvas.",
-          image: "assets/fotos/pag18.png",
-          imageAlt: "Paleteira e carrinhos de carga na loja",
+          layout: "figure",
+          wide: true,
+          kicker: "📄 Item 12.5.4 a)",
+          title: "Proteção fixa",
+          body: "Telas, gradis e carenagens que ficam sempre no lugar — e só saem com ferramenta.",
+          image: "assets/fotos/fixa.png",
+          imageAlt: "Proteção fixa em telas, gradil de proteção perimetral e carenagem de partes móveis do motor",
           imageFit: "contain",
-          transcript: "Foto: equipamentos de apoio da loja."
+          quote: "a) PROTEÇÃO FIXA, que deve ser mantida em sua posição de maneira permanente ou por meio de elementos de fixação que só permitam sua remoção ou abertura com o uso de ferramentas.",
+          transcript: "Proteção fixa: mantida em sua posição de maneira permanente ou por elementos de fixação que só permitam remoção ou abertura com o uso de ferramentas."
+        },
+        {
+          id: "m2-protecao-movel",
+          type: "content",
+          layout: "figure",
+          wide: true,
+          kicker: "📄 Item 12.5.4 b)",
+          title: "Proteção móvel",
+          body: "Portas e tampas que abrem sem ferramenta — por isso só valem com intertravamento.",
+          image: "assets/fotos/movel.png",
+          imageAlt: "Porta de proteção móvel em gradil amarelo com destaque na chave de intertravamento instalada na lateral",
+          imageFit: "contain",
+          quote: "b) PROTEÇÃO MÓVEL, que pode ser aberta sem o uso de ferramentas, geralmente ligada por elementos mecânicos à estrutura da máquina ou a um elemento fixo próximo, e deve se associar a dispositivos de intertravamento.",
+          transcript: "Proteção móvel: pode ser aberta sem o uso de ferramentas, geralmente ligada por elementos mecânicos à estrutura da máquina ou a um elemento fixo próximo, e deve se associar a dispositivos de intertravamento."
+        },
+        {
+          id: "m2-v-rearme",
+          type: "video",
+          kicker: "🎥 Vídeo 4",
+          title: "Rearme Manual (Reset), Duplo Rearme e Zonas Enclausuradas",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=85765f1c-e236-4eb7-a2ab-72ecd20b6c58",
+          playerId: "panda-85765f1c-e236-4eb7-a2ab-72ecd20b6c58",
+          scene: "Painel elétrico com botão de Reset azul e esquema de zona enclausurada",
+          brief: "Itens 12.5.3 e 12.5.13: reset fora da zona de perigo, com visão da área; duplo rearme ou sensor se a visão for obstruída; emergência no interior de recintos enclausurados.",
+          transcript: "Vídeo: rearme manual, duplo rearme e zonas enclausuradas."
+        },
+        {
+          id: "m2-v-escadas",
+          type: "video",
+          kicker: "🎥 Vídeo 5",
+          title: "Meios de Acesso Permanentes e Estrutura de Escadas Industriais",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=89bea93a-6493-4bdd-a81f-c36de1a26ffd",
+          playerId: "panda-89bea93a-6493-4bdd-a81f-c36de1a26ffd",
+          scene: "Diagrama das partes da escada e comparação com espelho versus sem espelho",
+          brief: "Itens 12.5.14 e 12.5.15: escadas, passarelas e plataformas; proteção no fundo dos degraus (espelhos) quando o pé ou a mão puder alcançar a zona de perigo.",
+          transcript: "Vídeo: meios de acesso permanentes e estrutura de escadas industriais."
+        },
+        {
+          id: "m2-partes-escada",
+          type: "content",
+          layout: "figure",
+          wide: true,
+          kicker: "📄 Itens 12.5.14 e 12.5.15",
+          title: "Partes da escada industrial",
+          body: "Se a proteção também serve de acesso, ela precisa resistir às duas funções — e você precisa saber nomear cada parte na inspeção.",
+          image: "assets/fotos/escada.png",
+          imageAlt: "Diagrama das partes da escada: corrimão, guarda-corpo de 60 a 100 cm, patamar entre lances, degrau, base ou piso e espelho",
+          imageFit: "contain",
+          cards: [
+            { icon: "🪜", title: "Degrau e base", body: "Apoio antiderrapante." },
+            { icon: "⬛", title: "Espelho", body: "Fundo fechado (12.5.15)." },
+            { icon: "🛬", title: "Patamar", body: "Descanso entre lances." },
+            { icon: "🛡️", title: "Guarda-corpo e corrimão", body: "Altura de 60 a 100 cm." }
+          ],
+          quote: "Espelho aberto sobre partes móveis é risco grave de acidente.",
+          transcript: "Partes da escada industrial: degrau e base ou piso com apoio antiderrapante, espelho com o fundo fechado conforme o item 12.5.15, patamar de descanso entre os lances, e guarda-corpo com corrimão a uma altura de 60 a 100 centímetros. Espelho aberto sobre partes móveis é risco grave de acidente."
+        },
+        {
+          id: "m2-v-trepadeiras",
+          type: "video",
+          kicker: "🎥 Vídeo 6",
+          title: "Escadas Trepadeiras e Escadas Tipo Marinheiro",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=7d3c6f74-4500-4fa9-92a3-5fda1e10ca3a",
+          playerId: "panda-7d3c6f74-4500-4fa9-92a3-5fda1e10ca3a",
+          scene: "Comparativo trepadeira 50×50 cm sem NR-12 versus 60×60 cm com guarda-corpo, e escada marinheiro com gaiola",
+          brief: "Trepadeira NR-12: patamar mínimo 60×60 cm, degraus antiderrapantes e guarda-corpo com rodapé. Marinheiro: estrutura robusta e gaiola perimetral.",
+          transcript: "Vídeo: escadas trepadeiras e escadas tipo marinheiro."
+        },
+        {
+          id: "m2-acesso-vertical",
+          type: "content",
+          layout: "figure",
+          wide: true,
+          kicker: "📄 Comparativo NR-12",
+          title: "Escada trepadeira",
+          body: "Mesma escada, dois resultados na inspeção: a diferença está no patamar, nos degraus e no guarda-corpo.",
+          image: "assets/fotos/escadas.png",
+          imageAlt: "Comparação entre escada trepadeira fora da NR-12, com patamar de 50 × 50 cm, e escada trepadeira conforme, com patamar de 60 × 60 cm",
+          imageFit: "contain",
+          cards: [
+            { icon: "❌", title: "Fora da NR-12", body: "Patamar de 50 × 50 cm." },
+            { icon: "✅", title: "Conforme", body: "Patamar mínimo 60 × 60 cm." },
+            { icon: "🦶", title: "Degraus", body: "Superfície antiderrapante." },
+            { icon: "🛡️", title: "Guarda-corpo", body: "Contínuo, com rodapé." }
+          ],
+          quote: "Meça o patamar no chão de fábrica: 50 × 50 cm é não conformidade.",
+          transcript: "Escada trepadeira: o patamar de 50 por 50 centímetros está fora da NR-12. A trepadeira conforme tem patamar de no mínimo 60 por 60 centímetros, degraus com superfície antiderrapante e guarda-corpo contínuo com rodapé. Meça o patamar no chão de fábrica: 50 por 50 centímetros é não conformidade."
+        },
+        {
+          id: "m2-marinheiro",
+          type: "content",
+          layout: "figure",
+          wide: true,
+          kicker: "📄 Acesso vertical",
+          title: "Escada tipo marinheiro",
+          body: "Acesso vertical fixo para os pontos altos da instalação — aqui a gaiola é o que segura o trabalhador.",
+          image: "assets/fotos/marinheiro.png",
+          imageAlt: "Escada tipo marinheiro amarela fixada em pilar, com gaiola de proteção perimetral, instalada por trabalhador em plataforma elevatória",
+          imageFit: "contain",
+          cards: [
+            { icon: "🟡", title: "Gaiola", body: "Proteção perimetral contra queda." },
+            { icon: "⚓", title: "Ancoragem", body: "Estrutura robusta e fixa." },
+            { icon: "🦶", title: "Degraus", body: "Antiderrapantes e regulares." },
+            { icon: "✋", title: "Subida", body: "Mãos livres, um trabalhador por vez." }
+          ],
+          quote: "Com essas diretrizes, cobrimos as proteções físicas e os acessos seguros.",
+          transcript: "Escada tipo marinheiro: acesso vertical fixo com estrutura robusta e ancorada, gaiola de proteção perimetral contra queda e degraus antiderrapantes com espaçamento regular. A subida é feita com as mãos livres e um trabalhador por vez. Com essas diretrizes, cobrimos as proteções físicas e os acessos seguros."
         },
         {
           id: "m2-quiz-intro",
           type: "quiz-intro",
-          title: "Desafio NR 17 — Módulo 2",
-          count: 4,
-          minCorrect: 3,
-          icon: "🎮",
-          transcript: "Desafio final do módulo 2: 4 cenários."
+          title: "Inspeção NR-12 — Módulo 2",
+          count: 5,
+          minCorrect: 4,
+          icon: "🛡️",
+          body: "Você é o guardião das proteções. São <strong>5 casos</strong> do chão de fábrica: classifique cada um como <strong>conforme</strong> ou <strong>não conforme</strong>. Errou, segue para o próximo. Acerte no mínimo <strong>4</strong>. Cada acerto vale <strong>50 pontos</strong>.",
+          transcript: "Desafio do módulo 2: inspeção no chão de fábrica. Classifique 5 casos como conforme ou não conforme."
         },
         {
-          id: "m2-q1",
-          type: "question",
-          question: "Colaborador levanta sozinho 18 kg, com a pega próxima ao corpo. Liberar?",
-          image: "assets/fotos/m2-p9.png",
-          alternatives: [
-            { id: "a", text: "Liberar", correct: true },
-            { id: "b", text: "Não liberar", correct: false }
+          id: "m2-sort",
+          type: "sort",
+          kicker: "🕹️ Inspeção",
+          title: "Inspeção no chão de fábrica",
+          body: "Toque em conforme ou não conforme para cada caso.",
+          time: 50,
+          minCorrect: 4,
+          left: { id: "nok", label: "Não conforme", icon: "✕" },
+          right: { id: "ok", label: "Conforme", icon: "✓" },
+          items: [
+            {
+              text: "Proteção de tela presa só com parafusos — sai apenas com ferramenta.",
+              bin: "ok",
+              hint: "Proteção fixa pode (e deve) sair só com ferramenta."
+            },
+            {
+              text: "Porta de gradil que abre com a mão, sem chave de intertravamento.",
+              bin: "nok",
+              hint: "Proteção móvel só vale se estiver associada a intertravamento."
+            },
+            {
+              text: "O operador fecha a proteção móvel e a máquina religa o movimento sozinha.",
+              bin: "nok",
+              hint: "Fechar a proteção nunca pode dar início ao movimento por si só."
+            },
+            {
+              text: "Escada trepadeira com patamar superior de 50 × 50 cm.",
+              bin: "nok",
+              hint: "O patamar NR-12 tem no mínimo 60 × 60 cm."
+            },
+            {
+              text: "Trepadeira com patamar 60 × 60 cm, degraus antiderrapantes e guarda-corpo contínuo com rodapé.",
+              bin: "ok",
+              hint: "Essas são as três marcas da trepadeira conforme."
+            }
           ],
-          explanation: "18 kg está abaixo de 25 kg e a pega está correta — pode liberar.",
-          review: "O limite de peso para transportar sozinho (NR 17.5)",
-          transcript: "Cenário 1 do módulo 2."
-        },
-        {
-          id: "m2-q2",
-          type: "question",
-          question: "Caixa de 30 kg do estoque ao checkout. Liberar transporte sozinho?",
-          image: "assets/fotos/m2-p10.png",
-          alternatives: [
-            { id: "a", text: "Liberar", correct: false },
-            { id: "b", text: "Não liberar", correct: true }
-          ],
-          explanation: "Acima de 25 kg exige duas pessoas ou equipamento.",
-          review: "O limite de peso para transportar sozinho (NR 17.5)",
-          transcript: "Cenário 2 do módulo 2."
-        },
-        {
-          id: "m2-q3",
-          type: "question",
-          question: "A pega está a 70 cm do corpo. Liberar o levantamento nessa posição?",
-          image: "assets/fotos/m2-p11.png",
-          alternatives: [
-            { id: "a", text: "Liberar", correct: false },
-            { id: "b", text: "Não liberar", correct: true }
-          ],
-          explanation: "É vedado acima de 60 cm — reorganize o local de pega.",
-          review: "A distância máxima de pega em relação ao corpo",
-          transcript: "Cenário 3 do módulo 2."
-        },
-        {
-          id: "m2-q4",
-          type: "question",
-          question: "Transporte contínuo de caixas por 3 horas sem pausa. Liberar a rotina?",
-          image: "assets/fotos/m2-p12.png",
-          alternatives: [
-            { id: "a", text: "Liberar", correct: false },
-            { id: "b", text: "Não liberar", correct: true }
-          ],
-          explanation: "O limite é pausa a cada 2 horas de movimentação contínua.",
-          review: "De quanto em quanto tempo a pausa é obrigatória",
-          transcript: "Cenário 4 — fim do módulo 2."
+          review: "Classificar proteções fixas, móveis, intertravamento e acessos como conforme ou não conforme",
+          transcript: "Inspeção: classifique cada caso como conforme ou não conforme."
         }
       ]
     },
     {
       id: 3,
       title: "Intervenções Seguras, Bloqueio de Energias (LOTO) e Permissão de Trabalho",
-      meta: "Vídeos + conteúdo · 5 V/F no final",
+      objective: "Aplicar protocolos de manutenção, LOTO e Permissão de Trabalho na desenergização segura.",
+      meta: "Vídeos + conteúdo · 3 V/F no final",
       titleUnlock: {
-        title: "LEITOR DO CORPO",
-        body: "Você reconhece posturas de risco e os limites do movimento no dia a dia.",
-        icon: "👁️"
+        title: "GUARDIÃO DO LOTO",
+        body: "Você executa ou audita intervenções com energia zero, bloqueio, etiquetagem e Permissão de Trabalho.",
+        icon: "🔒"
       },
       screens: [
         {
           id: "m3-cover",
           type: "cover",
           title: "Módulo 3 — Intervenções Seguras, Bloqueio de Energias (LOTO) e Permissão de Trabalho",
-          subtitle: "Protocolos de manutenção, LOTO e Permissão de Trabalho.",
+          subtitle: "Protocolos operacionais e formais para manutenção, inspeção, limpeza, ajustes e desenergização segura.",
           image: "assets/fotos/m3-p1.png",
           transcript: "Módulo 3: intervenções seguras, bloqueio de energias LOTO e permissão de trabalho."
         },
         {
-          id: "m3-v-pe",
+          id: "m3-v-pt",
           type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Postura correta no posto em pé",
-          duration: "1:20",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=ebc6453b-0268-4da9-b0a8-73914881994d",
-          playerId: "panda-ebc6453b-0268-4da9-b0a8-73914881994d",
-          scene: "Cena a filmar na área de vendas",
-          brief: "Colaborador reabastece prateleira na altura do peito sem curvar o tronco; estende o braço para prateleira mais alta; usa banco de apoio para prateleira baixa, em vez de agachar.",
-          transcript: "Vídeo: postura correta no posto em pé."
+          kicker: "🎥 Vídeo 1",
+          title: "Requisitos de Intervenção e Permissão de Trabalho (PT)",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=e95399c7-c31f-44af-84f0-ec585c6f7196",
+          playerId: "panda-e95399c7-c31f-44af-84f0-ec585c6f7196",
+          scene: "Slide ilustrativo da Permissão de Trabalho (PT) e diretrizes de intervenção no item 12.11.3",
+          brief: "Item 12.11.3: autorização formal, capacitação e habilitação para manutenção e intervenção; requisitos, preenchimento e emissão da Permissão de Trabalho antes da tarefa.",
+          transcript: "Vídeo: requisitos de intervenção e Permissão de Trabalho."
         },
         {
-          id: "m3-iso",
+          id: "m3-v-seccionamento",
+          type: "video",
+          kicker: "🎥 Vídeo 2",
+          title: "Seccionamento e Purga de Energias Perigosas (LOTO — Etapa 1)",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=84dfa77e-72dc-4e56-add4-fe90c6fd8f6f",
+          playerId: "panda-84dfa77e-72dc-4e56-add4-fe90c6fd8f6f",
+          scene: "Painel elétrico seccionado e purga de linhas hidráulicas e pneumáticas",
+          brief: "Primeira etapa do LOTO: seccionar, isolar e purgar ou descarregar todas as fontes de energia — elétrica, hidráulica, pneumática e mecânica.",
+          transcript: "Vídeo: seccionamento e purga de energias perigosas, etapa 1 do LOTO."
+        },
+        {
+          id: "m3-v-bloqueio",
+          type: "video",
+          kicker: "🎥 Vídeo 3",
+          title: "Bloqueio Físico Mecânico/Elétrico e Etiquetagem (LOTO — Etapa 2)",
+          duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=bd7636e6-811c-4785-9366-2466eced8173",
+          playerId: "panda-bd7636e6-811c-4785-9366-2466eced8173",
+          scene: "Cadeado no dispositivo de bloqueio e etiqueta preenchida com responsável, data, horário e motivo",
+          brief: "Segunda etapa do LOTO: aplicar cadeados e dispositivos físicos de bloqueio, identificar com etiqueta de sinalização e garantir retenção mecânica de partes suspensas ou articuladas.",
+          transcript: "Vídeo: bloqueio físico e etiquetagem, etapa 2 do LOTO."
+        },
+        {
+          id: "m3-energia-zero",
           type: "content",
-          title: "O que diz a ISO 11226",
-          image: "assets/fotos/p23.png",
-          imageAlt: "Ilustração ISO 11226: postura estática de 4 segundos, variação a cada 2 horas e zonas de alcance na loja",
-          stats: [
-            { num: "4 s", label: "já é postura estática de trabalho" },
-            { num: "2 h", label: "limite antes de variar a postura" }
-          ],
-          rules: [
-            { text: "Posturas ajoelhada e agachada devem ser evitadas no abastecimento — usar sempre um suporte para sentar." },
-            { text: "Em pé: tronco sem flexão rotineira; itens frequentes no alcance normal, ocasionais no alcance máximo." },
-            { text: "Baixa estatura: pés apoiados, tronco próximo ao mobiliário, sem compressão do corpo." }
-          ],
-          transcript: "ISO 11226: 4 segundos e variação antes de 2 horas."
-        },
-        {
-          id: "m3-reposicao",
-          type: "compare",
-          title: "Reposição baixa: certo × errado",
-          open: true,
-          compare: [
+          kicker: "🖐️ Interativo",
+          title: "Energia acumulada e trava mecânica (LOTO — Etapa 3)",
+          body: "Toque em cada garantia para ler o que a etapa 3 exige.",
+          spots: [
             {
-              ok: true,
-              label: "✓ Correto",
-              image: "assets/fotos/p24.1.png",
-              imageAlt: "Colaborador sentado no suporte diante da prateleira baixa",
-              text: "Use o suporte para sentar — joelhos e coluna agradecem."
+              icon: "⚡",
+              tag: "Energia acumulada",
+              title: "Nada perigoso a jusante do corte",
+              body: "O item 12.11.3 determina medidas para garantir que, a jusante dos pontos de corte de energia, não exista qualquer possibilidade de gerar acidentes por energia acumulada."
             },
             {
-              ok: false,
-              label: "✕ Evitar",
-              image: "assets/fotos/p24.2.png",
-              imageAlt: "Colaborador agachado diante da prateleira baixa",
-              text: "Agachar por tempo prolongado sobrecarrega joelhos e coluna."
+              icon: "🔧",
+              tag: "Trava mecânica",
+              title: "Retenção com trava é obrigatória",
+              body: "Na manutenção de máquina sustentada por sistema hidráulico ou pneumático, ou com partes articuladas e basculadas abertas, é obrigatório usar sistema de retenção com trava mecânica."
+            },
+            {
+              icon: "⬇️",
+              tag: "Contra a gravidade",
+              title: "Sem retorno e sem queda",
+              body: "A trava impede o movimento de retorno acidental e a queda de partes suspensas por ação da gravidade, mesmo que ocorra vazamento de fluido ou perda de pressão."
+            },
+            {
+              icon: "🛡️",
+              tag: "Suporte físico",
+              title: "O que sustenta a estrutura",
+              body: "A trava mecânica é o suporte físico que garante que a estrutura não caia sobre o trabalhador."
             }
           ],
-          transcript: "Na prateleira baixa, use o suporte para sentar."
+          quote: "Pressão zero no sistema não sustenta a carga. Só a trava mecânica sustenta.",
+          transcript: "Etapa 3 do LOTO: eliminar energia acumulada a jusante do corte e aplicar retenção com trava mecânica em partes suspensas ou articuladas."
         },
         {
-          id: "m3-v-riscos",
+          id: "m3-dispositivos",
+          type: "content",
+          kicker: "🖐️ Interativo",
+          title: "Dispositivos de bloqueio e etiquetagem",
+          body: "Toque na foto para ver a próxima — são três pranchas de dispositivos usados no LOTO.",
+          stack: [
+            {
+              image: "assets/fotos/CARROSEL1.png",
+              imageAlt: "Garra para bloqueios múltiplos, cadeados coloridos, multibloqueador com cabo e caixa de travamento móvel",
+              caption: "Garras, cadeados, multibloqueador com cabo e caixa de travamento de grupo"
+            },
+            {
+              image: "assets/fotos/CARROSEL%202.png",
+              imageAlt: "Dispositivos de bloqueio de interruptor, plugue elétrico industrial e doméstico, válvula de cilindro pressurizado e componente pneumático",
+              caption: "Bloqueio de interruptor, plugues elétricos, cilindro pressurizado e componente pneumático"
+            },
+            {
+              image: "assets/fotos/CARROSEL%203.png",
+              imageAlt: "Dispositivos de bloqueio de válvula borboleta, válvula esfera e válvula gaveta, em uso nas tubulações",
+              caption: "Bloqueio de válvulas borboleta, esfera e gaveta"
+            }
+          ],
+          transcript: "Dispositivos de bloqueio e etiquetagem: garras, cadeados e caixa de travamento; bloqueio de interruptor, plugues e componentes pneumáticos; bloqueio de válvulas borboleta, esfera e gaveta."
+        },
+        {
+          id: "m3-v-automotiva",
           type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Riscos biomecânicos do dia a dia",
+          kicker: "🎥 Vídeo 4",
+          title: "Bloqueio e Etiquetagem na Manutenção Automotiva",
           duration: "1:00",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=4efe0fe2-5882-4a65-8f8e-d185d6726bb7",
-          playerId: "panda-4efe0fe2-5882-4a65-8f8e-d185d6726bb7",
-          scene: "Cena a filmar em três setores da loja",
-          brief: "Três riscos: movimento repetitivo (caixa), vibração (paleteira motorizada) e postura forçada (torcer o tronco por item mal posicionado).",
-          transcript: "Vídeo: riscos biomecânicos — repetição, vibração e postura forçada."
-        },
-        {
-          id: "m3-reflexao",
-          type: "reflect",
-          kicker: "💭 Reflexão",
-          title: "Uma pausa para pensar",
-          prompt: "E você, já reparou nisso na sua rotina?",
-          answer: "Movimento repetitivo, vibração e postura forçada acontecem em pequenos momentos do dia a dia — muitas vezes sem percebermos. Preste atenção na próxima tarefa que você fizer e veja se algum desses riscos aparece.",
-          transcript: "Reflexão: riscos na rotina."
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=22c97e21-85d3-42ed-8ce4-c449066069cc",
+          playerId: "panda-22c97e21-85d3-42ed-8ce4-c449066069cc",
+          scene: "Bloqueios e etiquetas aplicados na manutenção automotiva",
+          brief: "Aplicação dos procedimentos de bloqueio e etiquetagem na manutenção automotiva.",
+          transcript: "Vídeo: bloqueio e etiquetagem na manutenção automotiva."
         },
         {
           id: "m3-quiz-intro",
           type: "quiz-intro",
-          title: "Modo Sprint — Módulo 3",
-          count: 5,
-          minCorrect: 4,
+          title: "Modo Sprint — Intervenção Segura e LOTO",
+          count: 3,
+          minCorrect: 2,
           icon: "🏃",
-          body: "Responda <strong>5</strong> afirmações de verdadeiro ou falso. Acerte no mínimo <strong>4</strong> para avançar. Cada acerto vale até <strong>50 pontos</strong>.",
-          transcript: "Desafio sprint do módulo 3: 5 verdadeiro ou falso."
+          body: "Responda <strong>3</strong> afirmações de verdadeiro ou falso sobre Permissão de Trabalho e as etapas do LOTO. Acerte no mínimo <strong>2</strong> para avançar. Cada acerto vale até <strong>50 pontos</strong>.",
+          transcript: "Desafio sprint do módulo 3: 3 verdadeiro ou falso sobre permissão de trabalho e LOTO."
         },
         {
           id: "m3-q1",
           type: "question",
-          question: "Uma postura mantida por mais de 4 segundos já é considerada postura estática.",
-          image: "assets/fotos/m3-p8.png",
+          question: "Manutenção, inspeção, reparo, limpeza e ajuste podem ser feitos com a máquina em funcionamento, desde que o trabalhador seja experiente.",
+          image: "assets/fotos/m3p9.png",
+          imageAlt: "Técnico com prancheta inspecionando a linha de envase em operação, com colega intervindo no equipamento ao fundo",
           alternatives: [
-            { id: "a", text: "Verdadeiro", correct: true },
-            { id: "b", text: "Falso", correct: false }
+            { id: "a", text: "Verdadeiro", correct: false },
+            { id: "b", text: "Falso", correct: true }
           ],
-          explanation: "Sim — a partir de cerca de 4 segundos a postura é estática.",
-          review: "A partir de quando uma postura é considerada estática",
+          explanation: "Falso — o item 12.11.3 exige a máquina parada, com trabalhadores capacitados e formalmente autorizados pelo empregador.",
+          review: "Quando a intervenção pode ser feita e quem pode executá-la (12.11.3)",
           transcript: "V/F 1 do módulo 3."
         },
         {
           id: "m3-q2",
           type: "question",
-          question: "Ajoelhar ou agachar por longos períodos não é problema se a pessoa se sentir confortável.",
-          image: "assets/fotos/m3-p9.png",
+          question: "Desligar o botão do painel já resolve: não é preciso descarregar o ar comprimido, o óleo sob pressão nem as molas comprimidas.",
+          image: "assets/fotos/m3p10.png",
+          imageAlt: "Operador aperta o botão Desliga no painel, com o reservatório de ar comprimido ainda pressurizado ao fundo",
           alternatives: [
             { id: "a", text: "Verdadeiro", correct: false },
             { id: "b", text: "Falso", correct: true }
           ],
-          explanation: "Falso — use assento/suporte.",
-          review: "Ajoelhar e agachar por longos períodos: o que a norma orienta",
+          explanation: "Falso — a etapa 1 do LOTO isola e purga todas as fontes: elétrica, pneumática, hidráulica e mecânica acumulada.",
+          review: "O seccionamento e a purga de todas as energias (LOTO — etapa 1)",
           transcript: "V/F 2 do módulo 3."
         },
         {
           id: "m3-q3",
           type: "question",
-          question: "Para pessoas de baixa estatura, os pés devem estar apoiados e sem compressão pelo mobiliário.",
-          image: "assets/fotos/m3-p10.png",
+          question: "A etiqueta de bloqueio precisa trazer a data, o horário, o motivo da manutenção e o nome do responsável pela intervenção.",
+          image: "assets/fotos/m3p11.png",
+          imageAlt: "Cadeado na chave seccionadora com etiqueta Equipamento Bloqueado preenchida com data, horário, motivo e responsável",
           alternatives: [
             { id: "a", text: "Verdadeiro", correct: true },
             { id: "b", text: "Falso", correct: false }
           ],
-          explanation: "Verdadeiro — pés apoiados e sem compressão.",
-          review: "Apoio dos pés e mobiliário para pessoas de baixa estatura",
-          transcript: "V/F 3 do módulo 3."
-        },
-        {
-          id: "m3-q4",
-          type: "question",
-          question: "A variação postural contínua deve acontecer antes de completar 2 horas na mesma postura.",
-          image: "assets/fotos/pergunta-variacao.png",
-          alternatives: [
-            { id: "a", text: "Verdadeiro", correct: true },
-            { id: "b", text: "Falso", correct: false }
-          ],
-          explanation: "Verdadeiro — varie antes de 2 horas contínuas.",
-          review: "Em quanto tempo a postura precisa ser variada",
-          transcript: "V/F 4 do módulo 3."
-        },
-        {
-          id: "m3-q5",
-          type: "question",
-          question: "O movimento repetitivo não é considerado um risco biomecânico relevante no comércio e na logística.",
-          image: "assets/fotos/m3-p11.png",
-          alternatives: [
-            { id: "a", text: "Verdadeiro", correct: false },
-            { id: "b", text: "Falso", correct: true }
-          ],
-          explanation: "Falso — é um dos três grandes riscos biomecânicos.",
-          review: "Quais são os três riscos biomecânicos do dia a dia",
-          transcript: "V/F 5 — fim do módulo 3."
+          explanation: "Verdadeiro — e o cadeado ou a etiqueta de outro trabalhador jamais deve ser removido por você.",
+          review: "O que a etiqueta de bloqueio precisa informar (LOTO — etapa 2)",
+          transcript: "V/F 3 — fim do módulo 3."
         }
       ]
     },
     {
       id: 4,
       title: "Diagnóstico Prático no Chão de Fábrica, Anexos Setoriais e Conscientização",
+      objective: "Auditar máquinas no chão de fábrica, consultar os Anexos da NR-12 e fortalecer a cultura preventiva.",
       meta: "Vídeos + conteúdo · ordenar a rotina no final",
       titleUnlock: {
-        title: "AJUSTADOR DO POSTO",
-        body: "Pequenos ajustes no monitor e na rotina agora fazem parte do seu método.",
-        icon: "⚙️"
+        title: "AUDITOR DO CHÃO DE FÁBRICA",
+        body: "Você identifica conformidade, consulta o anexo certo e multiplica a cultura de segurança.",
+        icon: "🏭"
       },
       screens: [
         {
           id: "m4-cover",
           type: "cover",
           title: "Módulo 4 — Diagnóstico Prático no Chão de Fábrica, Anexos Setoriais e Conscientização",
-          subtitle: "Auditorias visuais, anexos da NR-12 e cultura preventiva.",
+          subtitle: "Auditorias visuais de segurança em máquinas industriais, Anexos da NR-12 e cultura preventiva.",
           image: "assets/fotos/m4-p1.png",
           transcript: "Módulo 4: diagnóstico prático no chão de fábrica, anexos setoriais e conscientização."
         },

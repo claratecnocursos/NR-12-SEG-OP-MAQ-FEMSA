@@ -13,6 +13,7 @@
  *  - compare:  { type, compare:[{ok,label,text}] }
  *  - order:    { type, items:[{key,text,rank}], time? }
  *  - match:    { type, pairs:[{ex,body}] }
+ *  - sort:     { type, items:[{text,bin,hint?}], left:{id,label,icon}, right:{id,label,icon}, time? }
  *  - question: { type, question, alternatives[2..4], explanation?, image?, opinion? }
  *
  * video: se tiver `video` (mp4) ou `youtube` (id/url), toca o player;
@@ -444,9 +445,90 @@
       </article>`;
   }
 
-  function figureHTML(data) {
+  /* Exploração por abas: o texto de cada ponto só aparece quando o aluno
+     toca nele. Assim a tela cabe inteira, sem rolagem, e o conteúdo denso
+     vira uma leitura de cada vez. */
+  function exploreHTML(data) {
+    var spots = Array.isArray(data.spots) ? data.spots : [];
+    var first = spots[0] || {};
+    var tabs = spots.map(function (s, i) {
+      return `<button type="button" class="qs-explore-tab${i === 0 ? ' is-on' : ''}" data-qs-explore="${i}">
+        ${s.icon ? `<span class="qs-explore-ico" aria-hidden="true">${esc(s.icon)}</span>` : ''}
+        <span>${esc(s.tag || s.title || '')}</span>
+      </button>`;
+    }).join('');
+    var dots = spots.map(function (_, i) {
+      return `<span class="qs-explore-dot${i === 0 ? ' is-seen' : ''}" data-qs-explore-dot="${i}"></span>`;
+    }).join('');
     return `
-      <article class="qs-screen is-content is-figure" data-qs-root data-type="content">
+      <article class="qs-screen is-content is-text is-explore" data-qs-root data-type="content">
+        <div class="qs-panel qs-panel-text qs-panel-explore">
+          <h2 class="qs-title">${esc(data.title || '')}</h2>
+          ${data.body ? `<p class="qs-explore-lead">${esc(data.body)}</p>` : ''}
+          <div class="qs-explore-tabs">${tabs}</div>
+          <div class="qs-explore-detail is-in" data-qs-explore-panel>
+            <h3 data-qs-explore-title>${esc(first.title || '')}</h3>
+            <p data-qs-explore-body>${esc(first.body || '')}</p>
+          </div>
+          <div class="qs-explore-foot">
+            <span class="qs-explore-dots" aria-hidden="true">${dots}</span>
+            <span class="qs-explore-count" data-qs-explore-count>1 de ${spots.length}</span>
+          </div>
+          ${data.quote ? `<blockquote class="qs-quote qs-explore-quote">${esc(data.quote)}</blockquote>` : ''}
+        </div>
+      </article>`;
+  }
+
+  /* Pilha de fotos: a de cima sai para o fim do baralho a cada toque. Uma
+     imagem grande por vez ocupa a altura que sobra, sem rolagem. */
+  function stackHTML(data) {
+    var slides = Array.isArray(data.stack) ? data.stack : [];
+    var cards = slides.map(function (s, i) {
+      return `<button type="button" class="qs-stack-card" data-qs-stack="${i}" data-pos="${i}">
+        <img src="${esc(s.image || '')}" alt="${esc(s.imageAlt || '')}" draggable="false">
+      </button>`;
+    }).join('');
+    var first = slides[0] || {};
+    return `
+      <article class="qs-screen is-content is-stack" data-qs-root data-type="content">
+        <header class="qs-stack-head">
+          <h2 class="qs-title">${esc(data.title || '')}</h2>
+          ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
+        </header>
+        <div class="qs-stack-wrap">
+          ${cards}
+          <span class="qs-stack-tap" data-qs-stack-tap aria-hidden="true">
+            <span class="qs-stack-tap-hand">
+              <span class="qs-stack-tap-ring"></span>
+              👆
+            </span>
+            <span class="qs-stack-tap-txt">Toque para trocar</span>
+          </span>
+        </div>
+        <p class="qs-stack-cap" data-qs-stack-cap>${esc(first.caption || '')}</p>
+        <div class="qs-stack-foot">
+          <span class="qs-stack-hint" data-qs-stack-hint>Passando sozinho — toque para trocar na hora</span>
+          <span class="qs-stack-count" data-qs-stack-count>1 de ${slides.length}</span>
+        </div>
+      </article>`;
+  }
+
+  function figureHTML(data) {
+    // cards aqui viram faixas rasas, para a foto seguir sendo o assunto da tela
+    var cards = Array.isArray(data.cards) ? data.cards : [];
+    var chips = cards.length
+      ? `<ul class="qs-figure-chips count-${cards.length}">${cards.map(function (c) {
+          return `<li class="qs-figure-chip">
+            <span class="qs-figure-chip-ico" aria-hidden="true">${esc(c.icon || '•')}</span>
+            <b>${esc(c.title || '')}</b>
+            ${c.body ? `<span>${esc(c.body)}</span>` : ''}
+          </li>`;
+        }).join('')}</ul>`
+      : '';
+
+    // `wide`: prancha panorâmica, que precisa aparecer inteira em vez de preencher
+    return `
+      <article class="qs-screen is-content is-figure${data.wide ? ' is-wide' : ''}${chips ? ' has-chips' : ''}" data-qs-root data-type="content">
         <header class="qs-figure-head">
           <h2 class="qs-title">${esc(data.title || '')}</h2>
           ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
@@ -454,6 +536,7 @@
         <div class="qs-figure-media">
           ${mediaHTML(data, { contain: true })}
         </div>
+        ${chips}
         ${data.quote ? `<blockquote class="qs-quote qs-figure-quote">${esc(data.quote)}</blockquote>` : ''}
       </article>`;
   }
@@ -461,6 +544,12 @@
   function contentHTML(data) {
     if (Array.isArray(data.links) && data.links.length) {
       return hazardMapHTML(data);
+    }
+    if (Array.isArray(data.spots) && data.spots.length) {
+      return exploreHTML(data);
+    }
+    if (Array.isArray(data.stack) && data.stack.length) {
+      return stackHTML(data);
     }
     if (data.layout === 'figure' && data.image) {
       return figureHTML(data);
@@ -654,6 +743,35 @@
       </article>`;
   }
 
+  function sortHTML(data) {
+    var items = Array.isArray(data.items) ? data.items : [];
+    var left = data.left || { id: 'nok', label: 'Não conforme', icon: '✕' };
+    var right = data.right || { id: 'ok', label: 'Conforme', icon: '✓' };
+    return `
+      <article class="qs-screen is-content is-sort is-timed" data-qs-root data-type="sort">
+        <div class="qs-qbar-wrap"><div class="qs-qbar"><i data-qs-timer></i></div></div>
+        <header class="qs-sort-head">
+          <h2 class="qs-title">${esc(data.title || 'Inspeção')}</h2>
+          ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
+          <p class="qs-sort-progress" data-qs-sort-progress>Caso 1 de ${items.length}</p>
+        </header>
+        <div class="qs-sort-stage">
+          <p class="qs-sort-card" data-qs-sort-card></p>
+        </div>
+        <div class="qs-sort-bins">
+          <button type="button" class="qs-sort-bin is-nok" data-qs-sort-bin="${esc(left.id)}">
+            <span aria-hidden="true">${esc(left.icon || '✕')}</span>
+            <b>${esc(left.label)}</b>
+          </button>
+          <button type="button" class="qs-sort-bin is-ok" data-qs-sort-bin="${esc(right.id)}">
+            <span aria-hidden="true">${esc(right.icon || '✓')}</span>
+            <b>${esc(right.label)}</b>
+          </button>
+        </div>
+        <p class="qs-sort-fb" data-qs-sort-fb hidden></p>
+      </article>`;
+  }
+
   function quizIntroHTML(data) {
     var count = data.count != null ? Number(data.count) : null;
     var min = data.minCorrect != null ? Number(data.minCorrect) : null;
@@ -810,6 +928,7 @@
     else if (type === 'compare') html = compareHTML(this.data);
     else if (type === 'order') html = orderHTML(this.data);
     else if (type === 'match') html = matchHTML(this.data);
+    else if (type === 'sort') html = sortHTML(this.data);
     else if (type === 'quiz-intro') html = quizIntroHTML(this.data);
     else if (type === 'quiz-result') html = quizResultHTML(this.data);
 
@@ -819,7 +938,7 @@
     this.el.addEventListener('click', this._onClick);
 
     var lockedVideo = type === 'video' && !!(this.data.embed || this.data.panda || this.data.video);
-    var gated = type === 'question' || type === 'order' || type === 'match' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps));
+    var gated = type === 'question' || type === 'order' || type === 'match' || type === 'sort' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps));
     if (!gated) this.state.answered = true;
 
     if (type === 'video' && (this.data.embed || this.data.panda || this.data.youtube || this.data.video)) {
@@ -829,10 +948,13 @@
     if (type === 'compare') this._bindCompare();
     if (type === 'order') this._bindOrder();
     if (type === 'match') this._bindMatch();
+    if (type === 'sort') this._bindSort();
     if (type === 'content' && this.data && this.data.steps) this._bindSteps();
     if (type === 'content' && this.data && this.data.links) this._bindHazard();
+    if (type === 'content' && this.data && this.data.spots) this._bindExplore();
+    if (type === 'content' && this.data && this.data.stack) this._bindStack();
 
-    if ((type === 'question' || type === 'order') && this.options.quizScoring) {
+    if ((type === 'question' || type === 'order' || type === 'sort') && this.options.quizScoring) {
       if (this.root) this.root.classList.add('is-timed');
       this._startTimer();
     }
@@ -1087,6 +1209,10 @@
       this._finishOrder(true);
       return;
     }
+    if (this.data.type === 'sort') {
+      this._finishSort(true);
+      return;
+    }
     this.select(-1, { timedOut: true });
   };
 
@@ -1147,6 +1273,124 @@
         beep('click');
       });
     });
+  };
+
+  QuestionScreen.prototype._bindExplore = function () {
+    var spots = (this.data && this.data.spots) || [];
+    var tabs = this.el.querySelectorAll('[data-qs-explore]');
+    var dots = this.el.querySelectorAll('[data-qs-explore-dot]');
+    var elTitle = this.el.querySelector('[data-qs-explore-title]');
+    var elBody = this.el.querySelector('[data-qs-explore-body]');
+    var elCount = this.el.querySelector('[data-qs-explore-count]');
+    var panel = this.el.querySelector('[data-qs-explore-panel]');
+    var seen = { 0: true };
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var i = Number(tab.getAttribute('data-qs-explore'));
+        var spot = spots[i] || {};
+        tabs.forEach(function (t) { t.classList.remove('is-on'); });
+        tab.classList.add('is-on');
+        if (elTitle) elTitle.textContent = spot.title || '';
+        if (elBody) elBody.textContent = spot.body || '';
+        seen[i] = true;
+        if (dots[i]) dots[i].classList.add('is-seen');
+        if (elCount) elCount.textContent = Object.keys(seen).length + ' de ' + spots.length;
+
+        /* reinicia a animação de entrada: sem o reflow o navegador reaproveita
+           a classe que já está lá e a troca acontece sem transição. */
+        if (panel) {
+          panel.classList.remove('is-in');
+          void panel.offsetWidth;
+          panel.classList.add('is-in');
+        }
+        beep('click');
+      });
+    });
+  };
+
+  QuestionScreen.prototype._bindStack = function () {
+    var self = this;
+    var cards = Array.prototype.slice.call(this.el.querySelectorAll('[data-qs-stack]'));
+    var count = this.el.querySelector('[data-qs-stack-count]');
+    var cap = this.el.querySelector('[data-qs-stack-cap]');
+    var hint = this.el.querySelector('[data-qs-stack-hint]');
+    var tap = this.el.querySelector('[data-qs-stack-tap]');
+    var slides = (this.data && this.data.stack) || [];
+    var total = cards.length;
+    if (total < 1) return;
+    var order = cards.map(function (_, i) { return i; });
+
+    var OUT_MS = 320;
+    var moving = false;
+
+    function paint(skip) {
+      order.forEach(function (idx, pos) {
+        var card = cards[idx];
+        if (card === skip) return;
+        card.setAttribute('data-pos', String(pos));
+        card.style.zIndex = String(total - pos);
+      });
+      var front = order[0];
+      if (count) count.textContent = (front + 1) + ' de ' + total;
+      if (cap) cap.textContent = (slides[front] && slides[front].caption) || '';
+    }
+
+    /* A foto da frente sai de cena antes de virar a última do baralho. Se ela
+       apenas trocasse de camada, o salto para trás aconteceria no meio do
+       movimento — era o que travava a animação. */
+    function advance() {
+      if (moving || total < 2) return;
+      moving = true;
+
+      var leaving = cards[order[0]];
+      order.push(order.shift());
+
+      leaving.style.zIndex = String(total + 1);
+      leaving.classList.add('is-out');
+      paint(leaving);
+
+      setTimeout(function () {
+        // volta ao fundo sem transição: sem isso ela atravessaria a tela de volta
+        leaving.classList.add('is-silent');
+        leaving.classList.remove('is-out');
+        paint();
+        requestAnimationFrame(function () {
+          void leaving.offsetWidth;
+          leaving.classList.remove('is-silent');
+          moving = false;
+        });
+      }, OUT_MS);
+    }
+
+    /* Passa sozinho para o aluno perceber que existe mais de uma foto; o
+       relógio reinicia a cada toque para não trocar a imagem debaixo do dedo. */
+    function play() {
+      self._stopStackAuto();
+      if (total < 2) return;
+      self._stackAuto = setInterval(advance, Number(self.data.interval) || 4200);
+    }
+
+    paint();
+    play();
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        // só a foto da frente avança: clicar na borda de trás não embaralha
+        if (total < 2 || card.getAttribute('data-pos') !== '0') return;
+        advance();
+        play();
+        beep('click');
+        if (tap) tap.classList.add('is-done');
+        if (hint) hint.textContent = 'Toque para ver a próxima';
+      });
+    });
+  };
+
+  QuestionScreen.prototype._stopStackAuto = function () {
+    if (this._stackAuto) {
+      clearInterval(this._stackAuto);
+      this._stackAuto = null;
+    }
   };
 
   QuestionScreen.prototype._bindCompare = function () {
@@ -1365,8 +1609,6 @@
           var pts = max;
           beep('end');
           self._complete({ kind: 'match', correct: true, points: pts, elapsed: elapsed });
-        } else {
-          beep('ok');
         }
       } else {
         beep('nok');
@@ -1382,6 +1624,116 @@
     }
 
     render();
+  };
+
+  QuestionScreen.prototype._bindSort = function () {
+    var self = this;
+    var deck = shuffle((this.data.items || []).slice());
+    var index = 0;
+    var moving = false;
+    var hits = 0;
+    var card = this.el.querySelector('[data-qs-sort-card]');
+    var prog = this.el.querySelector('[data-qs-sort-progress]');
+    var fb = this.el.querySelector('[data-qs-sort-fb]');
+
+    function showCase(enter) {
+      var item = deck[index];
+      if (!card || !item) return;
+      card.textContent = item.text;
+      card.classList.remove('is-wrong', 'is-ok', 'is-out');
+      if (enter) {
+        card.classList.remove('is-in');
+        void card.offsetWidth;
+        card.classList.add('is-in');
+      }
+      if (prog) prog.textContent = 'Caso ' + (index + 1) + ' de ' + deck.length;
+      if (fb) {
+        fb.hidden = true;
+        fb.textContent = '';
+        fb.className = 'qs-sort-fb';
+      }
+    }
+
+    function finish(timedOut) {
+      if (self.state.answered) return;
+      var min = self.data.minCorrect != null ? Number(self.data.minCorrect) : Math.ceil(deck.length * 0.75);
+      var passed = hits >= min;
+      var pts = 0;
+      if (self.options.quizScoring) {
+        for (var i = 0; i < hits; i++) pts += self._quizPoints(true);
+      }
+      if (fb) {
+        fb.hidden = false;
+        fb.className = 'qs-sort-fb ' + (passed ? 'is-ok' : 'is-nok');
+        fb.textContent = timedOut && hits < deck.length
+          ? ('Tempo esgotado. Você acertou ' + hits + ' de ' + deck.length + '.')
+          : (passed
+            ? ('Inspeção concluída — ' + hits + ' de ' + deck.length + ' no lugar certo.')
+            : ('Você acertou ' + hits + ' de ' + deck.length + '.'));
+      }
+      self.el.querySelectorAll('[data-qs-sort-bin]').forEach(function (btn) {
+        btn.disabled = true;
+      });
+      beep(passed ? 'end' : 'nok');
+      self._complete({
+        kind: 'sort',
+        correct: passed,
+        hits: hits,
+        total: deck.length,
+        points: pts,
+        timedOut: !!timedOut
+      });
+    }
+
+    function goNext(ok) {
+      index += 1;
+      moving = true;
+      setTimeout(function () {
+        moving = false;
+        if (index >= deck.length) finish(false);
+        else showCase(true);
+      }, ok ? 420 : 1100);
+    }
+
+    this._finishSort = function (timedOut) { finish(!!timedOut); };
+
+    this.el.querySelectorAll('[data-qs-sort-bin]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (self.state.answered || moving || index >= deck.length) return;
+        var item = deck[index];
+        var pick = btn.getAttribute('data-qs-sort-bin');
+        var ok = pick === item.bin;
+        if (ok) {
+          hits += 1;
+          beep('ok');
+          card.classList.remove('is-wrong');
+          card.classList.add('is-ok', 'is-out');
+          if (fb) {
+            fb.hidden = false;
+            fb.className = 'qs-sort-fb is-ok';
+            fb.textContent = 'Certo.';
+          }
+        } else {
+          beep('nok');
+          card.classList.remove('is-wrong', 'is-ok');
+          void card.offsetWidth;
+          card.classList.add('is-wrong', 'is-out');
+          if (fb) {
+            fb.hidden = false;
+            fb.className = 'qs-sort-fb is-nok';
+            fb.textContent = item.hint || 'Não conforme com a NR-12.';
+          }
+        }
+        goNext(ok);
+      });
+    });
+
+    showCase(true);
+  };
+
+  QuestionScreen.prototype._finishSort = function (timedOut) {
+    if (this.state.answered) return;
+    this._complete({ kind: 'sort', correct: false, points: 0, timedOut: !!timedOut });
   };
 
   QuestionScreen.prototype.select = function (index, extra) {
@@ -1468,6 +1820,7 @@
 
   QuestionScreen.prototype.destroy = function () {
     this._stopTimer();
+    this._stopStackAuto();
     if (this._matchTick) {
       clearInterval(this._matchTick);
       this._matchTick = null;
