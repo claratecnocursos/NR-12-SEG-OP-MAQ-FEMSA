@@ -3,8 +3,8 @@
  *
  * COMO FUNCIONA
  * O navegador NÃO chama a API. Ele apenas toca um mp3 já gravado em
- * assets/audio/. Os arquivos são gerados uma única vez pelo generate-audios.js
- * (script de terminal), que é quem fala com o endpoint da TecnoCursos.
+ * audios/. Os arquivos são gerados pelo generate-audios-proxy.js
+ * (script de terminal), via o proxy TecnoCursos + ElevenLabs.
  *
  * Vantagem: nenhum token no navegador, nada é gerado duas vezes, toca na hora
  * e funciona offline.
@@ -18,7 +18,8 @@
   'use strict';
 
   var CONFIG = {
-    audioDir: 'assets/audio/',
+    audioDir: 'audios/',
+    audioVer: '20260921b',
 
     // espera curta: vários eventos juntos viram uma chamada só
     debounceMs: 300,
@@ -55,7 +56,17 @@
   }
 
   function getAudioUrl(key) {
-    return CONFIG.audioDir + T.audioFileName(key);
+    var file = CONFIG.audioDir + T.audioFileName(key);
+    var man = global.__AUDIO_NARRATION__;
+    if (man && man.slides && man.slides.length) {
+      for (var i = 0; i < man.slides.length; i++) {
+        if (man.slides[i].id === key && man.slides[i].file) {
+          file = man.slides[i].file;
+          break;
+        }
+      }
+    }
+    return file + '?v=' + CONFIG.audioVer;
   }
 
   /* ── Áudio ─────────────────────────────────────────────────────────── */

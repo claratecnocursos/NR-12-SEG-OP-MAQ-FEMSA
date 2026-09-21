@@ -169,12 +169,28 @@
     return m ? m[1] : '';
   }
 
+  function zoomIcon() {
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>`;
+  }
+
+  function zoomChip(src, alt) {
+    return `<span class="qs-zoom-fab" data-qs-zoom="${esc(src)}" data-qs-zoom-alt="${esc(alt || '')}" role="button" tabindex="0" aria-label="Ampliar imagem">${zoomIcon()}</span>`;
+  }
+
   function mediaHTML(data, opts) {
     opts = opts || {};
     var fit = data.imageFit === 'contain' || opts.contain ? 'contain' : 'cover';
     if (data.image) {
-      return `<img class="qs-img qs-img-${fit}" src="${esc(data.image)}" alt="${esc(data.imageAlt || data.title || '')}" loading="eager" decoding="async" fetchpriority="high" onerror="this.classList.add('is-broken');this.nextElementSibling&&this.nextElementSibling.classList.add('show');">` +
-        `<div class="qs-media-fallback qs-img-fallback" aria-hidden="true">${esc(data.icon || '🖼️')}</div>`;
+      var pos = data.imagePosition
+        ? ' style="object-position:' + esc(data.imagePosition) + ';transform-origin:' + esc(data.imagePosition) + '"'
+        : '';
+      var img = `<img class="qs-img qs-img-${fit}" src="${esc(data.image)}" alt="${esc(data.imageAlt || data.title || '')}"${pos} loading="eager" decoding="async" fetchpriority="high" onerror="this.classList.add('is-broken');this.nextElementSibling&&this.nextElementSibling.classList.add('show');">`;
+      var fallback = `<div class="qs-media-fallback qs-img-fallback" aria-hidden="true">${esc(data.icon || '🖼️')}</div>`;
+      if (opts.zoom === false) return img + fallback;
+      return `<button type="button" class="qs-zoom-hit" data-qs-zoom="${esc(data.image)}" data-qs-zoom-alt="${esc(data.imageAlt || data.title || '')}" aria-label="Ampliar imagem">
+        ${img}${fallback}
+        <span class="qs-zoom-fab" aria-hidden="true">${zoomIcon()}</span>
+      </button>`;
     }
     return `<div class="qs-media-fallback" aria-hidden="true">${esc(data.icon || '📘')}</div>`;
   }
@@ -256,7 +272,7 @@
     return `
       <article class="qs-screen is-cover" data-qs-root data-type="cover">
         <div class="qs-media">
-          ${mediaHTML(data)}
+          ${mediaHTML(data, { zoom: false })}
           <div class="qs-cover-labels">
             <h1>${esc(data.title || '')}</h1>
             ${data.subtitle ? `<p>${esc(data.subtitle)}</p>` : ''}
@@ -410,21 +426,30 @@
 
   function hazardMapHTML(data) {
     var links = Array.isArray(data.links) ? data.links : [];
-    var rows = links.map(function (it, i) {
-      return `<button type="button" class="qs-hazard-row" data-qs-hazard="${i}">
-        <span class="qs-hazard-cell is-danger">
-          ${it.icon ? `<span class="qs-hazard-ico" aria-hidden="true">${esc(it.icon)}</span>` : ''}
-          <b>${esc(it.perigo || '')}</b>
-        </span>
-        <span class="qs-hazard-arrow" aria-hidden="true">
+    var arrow = `<span class="qs-hazard-arrow" aria-hidden="true">
           <svg viewBox="0 0 52 24" fill="none">
             <path d="M4 12h36"/>
             <path d="M32 5l12 7-12 7"/>
           </svg>
+        </span>`;
+    var rows = links.map(function (it, i) {
+      var perigo = it.perigo || '';
+      var risco = it.risco || '';
+      return `<button type="button" class="qs-hazard-row" data-qs-hazard="${i}" aria-label="Perigo: ${esc(perigo)}. Risco: ${esc(risco)}.">
+        <span class="qs-hazard-cell is-danger">
+          ${it.icon ? `<span class="qs-hazard-ico" aria-hidden="true">${esc(it.icon)}</span>` : ''}
+          <span class="qs-hazard-copy">
+            <span class="qs-hazard-tag">Perigo</span>
+            <b>${esc(perigo)}</b>
+          </span>
         </span>
+        ${arrow}
         <span class="qs-hazard-cell is-risk">
           ${it.riscoIcon ? `<span class="qs-hazard-ico" aria-hidden="true">${esc(it.riscoIcon)}</span>` : ''}
-          <b>${esc(it.risco || '')}</b>
+          <span class="qs-hazard-copy">
+            <span class="qs-hazard-tag">Risco</span>
+            <b>${esc(risco)}</b>
+          </span>
         </span>
       </button>`;
     }).join('');
@@ -433,10 +458,10 @@
         <div class="qs-panel qs-panel-text qs-panel-hazard">
           <h2 class="qs-title">${esc(data.title || '')}</h2>
           ${data.body ? `<p class="qs-hazard-lead">${esc(data.body)}</p>` : ''}
-          <div class="qs-hazard-legend" aria-hidden="true">
-            <span class="is-danger">Perigo</span>
-            <span class="qs-hazard-x">×</span>
-            <span class="is-risk">Risco</span>
+          <div class="qs-hazard-legend">
+            <span class="is-danger">Coluna do perigo</span>
+            ${arrow}
+            <span class="is-risk">Coluna do risco</span>
           </div>
           <div class="qs-hazard-map">${rows}</div>
           <p class="qs-hazard-caption" data-qs-hazard-cap>Toque em um par para ler a explicação.</p>
@@ -484,8 +509,11 @@
   function stackHTML(data) {
     var slides = Array.isArray(data.stack) ? data.stack : [];
     var cards = slides.map(function (s, i) {
+      var src = s.image || '';
+      var alt = s.imageAlt || s.caption || '';
       return `<button type="button" class="qs-stack-card" data-qs-stack="${i}" data-pos="${i}">
-        <img src="${esc(s.image || '')}" alt="${esc(s.imageAlt || '')}" draggable="false">
+        <img src="${esc(src)}" alt="${esc(alt)}" draggable="false">
+        ${src ? zoomChip(src, alt) : ''}
       </button>`;
     }).join('');
     var first = slides[0] || {};
@@ -603,7 +631,10 @@
       return `<div class="qs-step${i === 0 ? ' is-on' : ''}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
         <div class="qs-step-media">
           ${it.image
-            ? `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`
+            ? `<button type="button" class="qs-zoom-hit" data-qs-zoom="${esc(it.image)}" data-qs-zoom-alt="${esc(it.imageAlt || it.title || '')}" aria-label="Ampliar imagem">
+                <img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">
+                <span class="qs-zoom-fab" aria-hidden="true">${zoomIcon()}</span>
+              </button>`
             : `<div class="qs-step-fallback">${esc(num)}</div>`}
         </div>
         <div class="qs-step-info">
@@ -685,7 +716,7 @@
           <div class="qs-compare">${sides.map(function (c, i) {
             var ok = !!c.ok;
             var img = c.image
-              ? `<div class="qs-compare-media"><img class="qs-compare-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.label || '')}" loading="eager" decoding="async"></div>`
+              ? `<div class="qs-compare-media"><img class="qs-compare-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.label || '')}" loading="eager" decoding="async">${zoomChip(c.image, c.imageAlt || c.label || '')}</div>`
               : '';
             return `<button type="button" class="qs-compare-col ${ok ? 'is-ok' : 'is-bad'}${c.image ? ' has-img' : ''}${open ? ' is-open' : ''}" data-qs-compare="${i}"${open ? ' disabled' : ''}>
               <div class="qs-compare-lbl">${esc(c.label || (ok ? '✓ Correto' : '✕ Evitar'))}</div>
@@ -897,6 +928,77 @@
       </article>`;
   }
 
+  var zoomUi = null;
+  var zoomKey = null;
+  var onZoomToggle = null;
+
+  function zoomClose() {
+    if (!zoomUi || zoomUi.hidden) return;
+    zoomUi.hidden = true;
+    zoomUi.classList.remove('is-in');
+    var img = zoomUi.querySelector('.qs-zoom-pic');
+    if (img) {
+      img.removeAttribute('src');
+      img.style.transform = '';
+    }
+    document.body.classList.remove('qs-zoom-on');
+    if (zoomKey) {
+      document.removeEventListener('keydown', zoomKey);
+      zoomKey = null;
+    }
+    if (typeof onZoomToggle === 'function') onZoomToggle(false);
+  }
+
+  function zoomOpen(src, alt) {
+    if (!src) return;
+    if (!zoomUi) {
+      zoomUi = document.createElement('div');
+      zoomUi.className = 'qs-zoom';
+      zoomUi.hidden = true;
+      zoomUi.innerHTML =
+        '<button type="button" class="qs-zoom-x" aria-label="Fechar">×</button>' +
+        '<button type="button" class="qs-zoom-plus" aria-label="Ampliar">+</button>' +
+        '<div class="qs-zoom-stage">' +
+          '<img class="qs-zoom-pic" alt="">' +
+        '</div>' +
+        '<p class="qs-zoom-hint">Toque em + para ampliar · toque fora para fechar</p>';
+      document.body.appendChild(zoomUi);
+      zoomUi.addEventListener('click', function (e) {
+        if (e.target.closest('.qs-zoom-x')) {
+          zoomClose();
+          return;
+        }
+        if (e.target.closest('.qs-zoom-plus')) {
+          zoomUi.classList.toggle('is-in');
+          var on = zoomUi.classList.contains('is-in');
+          var plus = zoomUi.querySelector('.qs-zoom-plus');
+          plus.textContent = on ? '−' : '+';
+          plus.setAttribute('aria-label', on ? 'Reduzir' : 'Ampliar');
+          var hint = zoomUi.querySelector('.qs-zoom-hint');
+          if (hint) hint.textContent = on
+            ? 'Arraste para ver o detalhe · toque em − para reduzir'
+            : 'Toque em + para ampliar · toque fora para fechar';
+          return;
+        }
+        if (!e.target.closest('.qs-zoom-pic')) zoomClose();
+      });
+    }
+    var pic = zoomUi.querySelector('.qs-zoom-pic');
+    var plus = zoomUi.querySelector('.qs-zoom-plus');
+    var hint = zoomUi.querySelector('.qs-zoom-hint');
+    pic.src = src;
+    pic.alt = alt || '';
+    zoomUi.classList.remove('is-in');
+    plus.textContent = '+';
+    plus.setAttribute('aria-label', 'Ampliar');
+    if (hint) hint.textContent = 'Toque em + para ampliar · toque fora para fechar';
+    zoomUi.hidden = false;
+    document.body.classList.add('qs-zoom-on');
+    zoomKey = function (e) { if (e.key === 'Escape') zoomClose(); };
+    document.addEventListener('keydown', zoomKey);
+    if (typeof onZoomToggle === 'function') onZoomToggle(true);
+  }
+
   function QuestionScreen(container, data, options) {
     this.el = typeof container === 'string' ? document.querySelector(container) : container;
     this.options = options || {};
@@ -912,6 +1014,9 @@
 
   QuestionScreen.prototype.update = function (data) {
     this._stopTimer();
+    onZoomToggle = null;
+    this._stopStackAuto();
+    zoomClose();
     this.data = data || {};
     this.state.answered = false;
     this.state.selectedIndex = null;
@@ -953,6 +1058,7 @@
     if (type === 'content' && this.data && this.data.links) this._bindHazard();
     if (type === 'content' && this.data && this.data.spots) this._bindExplore();
     if (type === 'content' && this.data && this.data.stack) this._bindStack();
+    this._bindZoom();
 
     if ((type === 'question' || type === 'order' || type === 'sort') && this.options.quizScoring) {
       if (this.root) this.root.classList.add('is-timed');
@@ -1009,6 +1115,28 @@
     if (this._videoUnlocked) return;
     this._videoUnlocked = true;
     this._complete({ kind: 'video' });
+  };
+
+  QuestionScreen.prototype._bindZoom = function () {
+    var root = this.el;
+    if (!root) return;
+    root.querySelectorAll('[data-qs-zoom]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var src = btn.getAttribute('data-qs-zoom');
+        if (!src) return;
+        beep('click');
+        zoomOpen(src, btn.getAttribute('data-qs-zoom-alt') || '');
+      });
+      if (btn.tagName === 'BUTTON') return;
+      btn.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        e.stopPropagation();
+        btn.click();
+      });
+    });
   };
 
   QuestionScreen.prototype._bindVideoTags = function () {
@@ -1372,6 +1500,10 @@
 
     paint();
     play();
+    onZoomToggle = function (open) {
+      if (open) self._stopStackAuto();
+      else play();
+    };
 
     cards.forEach(function (card) {
       card.addEventListener('click', function () {
@@ -1821,6 +1953,8 @@
   QuestionScreen.prototype.destroy = function () {
     this._stopTimer();
     this._stopStackAuto();
+    onZoomToggle = null;
+    zoomClose();
     if (this._matchTick) {
       clearInterval(this._matchTick);
       this._matchTick = null;

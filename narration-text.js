@@ -17,7 +17,7 @@
   // "100%" vira extenso para a voz não ler "por cento" errado.
   var HOME_TEXT = [
     'Abertura do treinamento.',
-    'NR-12, Segurança no Trabalho em Máquinas e Equipamentos.',
+    'N R doze, Segurança no Trabalho em Máquinas e Equipamentos.',
     'Requisitos Técnicos, Proteções e Prevenção de Riscos em Máquinas e Equipamentos.',
     'São quatro módulos completos, em treinamento cem por cento online.'
   ].join(' ');

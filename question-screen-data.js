@@ -130,6 +130,7 @@ window.QUESTION_SCREEN_SESSION = {
           id: "m1-malhas",
           type: "content",
           layout: "figure",
+          wide: true,
           kicker: "📄 Números",
           title: "Item 12.5.1.1 — distâncias mínimas",
           body: "A abertura da malha define a distância até a zona de perigo.",
@@ -671,6 +672,8 @@ window.QUESTION_SCREEN_SESSION = {
           kicker: "🎥 Vídeo 1",
           title: "Inspeção Prática: Serra Circular e Torno Paralelo",
           duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=80e92688-387a-4b5c-b4d8-614d05d695a7",
+          playerId: "panda-80e92688-387a-4b5c-b4d8-614d05d695a7",
           scene: "Comparativo: serra de bancada desprotegida versus protegida; torno antigo livre versus torno com proteção deslizante móvel",
           brief: "Serra: lâmina e correia expostas versus proteção fixa superior e motor enclausurado. Torno: eixão livre versus proteção móvel transparente com intertravamento.",
           transcript: "Vídeo: inspeção prática de serra circular e torno paralelo."
@@ -681,6 +684,8 @@ window.QUESTION_SCREEN_SESSION = {
           kicker: "🎥 Vídeo 2",
           title: "Inspeção Prática: Esmeril e Furadeira de Bancada",
           duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=ae937e09-768f-466a-a315-6b2b802b24e9",
+          playerId: "panda-ae937e09-768f-466a-a315-6b2b802b24e9",
           scene: "Esmeril sem proteção do rebolo versus coifa e visor; furadeira com emergência, proteção de correia e visor da broca",
           brief: "Esmeril: coifa no rebolo e visor de policarbonato. Furadeira: proteção das correias, botão de emergência tipo cogumelo e proteção acrílica na broca.",
           transcript: "Vídeo: inspeção prática de esmeril e furadeira de bancada."
@@ -691,6 +696,8 @@ window.QUESTION_SCREEN_SESSION = {
           kicker: "🎥 Vídeo 3",
           title: "Inspeção Prática: Prensas Mecânicas e Roscas Transportadoras",
           duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=d9b33826-7a46-4c66-92b0-4d85297509b6",
+          playerId: "panda-d9b33826-7a46-4c66-92b0-4d85297509b6",
           scene: "Prensa com volante e engrenagens abertas versus grades amarelas enclausuradas; rosca helicoidal com tampa aberta",
           brief: "Prensa: enclausuramento perimetral com telas intertravadas. Rosca transportadora: tampas fixas ou intertravadas por chave de segurança.",
           transcript: "Vídeo: inspeção prática de prensas mecânicas e roscas transportadoras."
@@ -701,6 +708,8 @@ window.QUESTION_SCREEN_SESSION = {
           kicker: "🎥 Vídeo 4",
           title: "Conhecendo os Anexos Gerais da NR-12 (Anexos I a IV)",
           duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=b6b3fd21-6409-4306-8e07-e6b6c7068fc3",
+          playerId: "panda-b6b3fd21-6409-4306-8e07-e6b6c7068fc3",
           scene: "Slide Disposição dos Anexos da NR-12, destacando os blocos dos Anexos I ao IV",
           brief: "Anexo I: optoeletrônicos e distâncias. II: capacitação. III: meios de acesso. IV: glossário de termos técnicos.",
           transcript: "Vídeo: anexos gerais da NR-12, I a IV."
@@ -726,6 +735,8 @@ window.QUESTION_SCREEN_SESSION = {
           kicker: "🎥 Vídeo 5",
           title: "Anexos Setoriais da NR-12 (Anexos V a XII)",
           duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=67f3ae94-a0e8-4141-a3e6-b1816415fcf5",
+          playerId: "panda-67f3ae94-a0e8-4141-a3e6-b1816415fcf5",
           scene: "Slide Anexos da NR-12 com a lista dos Anexos V a XII e ícones dos setores",
           brief: "V motosserras; VI panificação; VII açougues e bares; VIII prensas; IX injetoras; X calçados; XI agrícolas; XII guindar em altura.",
           transcript: "Vídeo: anexos setoriais da NR-12, V a XII."
@@ -751,6 +762,8 @@ window.QUESTION_SCREEN_SESSION = {
           kicker: "🎥 Vídeo 6",
           title: "Cultura Preventiva e Engajamento de Segurança no Trabalho",
           duration: "1:00",
+          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=4f494c00-c23f-4c58-9a3b-1719eaab966b",
+          playerId: "panda-4f494c00-c23f-4c58-9a3b-1719eaab966b",
           scene: "Slide final: A Segurança no Trabalho Começa com Cada um de Nós! Tem alguém esperando sua chegada.",
           brief: "A barreira mais avançada não funciona sem atitude. Inspeção prévia, respeito aos bloqueios e nenhuma burla — alguém espera você em casa.",
           transcript: "Vídeo: cultura preventiva e encerramento do curso."
@@ -762,62 +775,75 @@ window.QUESTION_SCREEN_SESSION = {
           count: 4,
           minCorrect: 3,
           icon: "🏭",
-          transcript: "Desafio final do módulo 4: 4 perguntas."
+          body: "São <strong>4 perguntas</strong> sobre inspeção no chão de fábrica e anexos da NR-12. Acerte no mínimo <strong>3</strong>. Cada acerto vale <strong>50 pontos</strong>.",
+          transcript: "Desafio final do módulo 4: 4 perguntas. Acerte no mínimo 3."
         },
         {
           id: "m4-q1",
           type: "question",
-          question: "Na serra circular de bancada conforme a NR-12, o que deve aparecer na inspeção?",
+          question: "Na inspeção da serra circular e do torno paralelo, qual conjunto está conforme a NR-12?",
+          image: "assets/fotos/m4-p11.png",
+          imageAlt: "Inspetor entre serra circular de bancada com proteção na lâmina e torno paralelo com proteção móvel transparente",
+          imagePosition: "center 18%",
           alternatives: [
-            { id: "a", text: "Lâmina exposta e correia do motor à mostra, para facilitar a manutenção", correct: false },
-            { id: "b", text: "Proteção fixa superior na lâmina e carcaça do motor totalmente enclausurada", correct: true },
-            { id: "c", text: "Apenas uma faixa amarela no chão, sem barreira física", correct: false },
-            { id: "d", text: "Proteção móvel na lâmina, sem enclausurar o motor", correct: false }
+            { id: "a", text: "Serra com lâmina e correia expostas; torno com eixão e usinagem livres", correct: false },
+            { id: "b", text: "Serra com proteção fixa na lâmina e motor enclausurado; torno com proteção móvel transparente e intertravamento", correct: true },
+            { id: "c", text: "Apenas faixa amarela no chão, sem barreira física nos dois equipamentos", correct: false },
+            { id: "d", text: "Proteção só na lâmina da serra, deixando o motor e o torno descobertos", correct: false }
           ],
-          explanation: "O modelo adequado tem proteção fixa superior na lâmina e o motor enclausurado — lâmina e correia expostas reprovam a auditoria.",
-          review: "A conformidade da serra circular de bancada",
-          transcript: "Pergunta 1 do módulo 4."
+          explanation: "A serra adequada tem proteção fixa superior na lâmina e carcaça do motor enclausurada. O torno adequado tem proteção móvel transparente deslizante, com intertravamento, sobre a zona de corte.",
+          review: "A inspeção da serra circular e do torno paralelo",
+          transcript: "Pergunta 1 do módulo 4 — vídeo 1."
         },
         {
           id: "m4-q2",
           type: "question",
-          question: "Na furadeira de bancada, a NR-12 exige este trio de proteção:",
+          question: "Quais proteções o esmeril e a furadeira de bancada precisam ter?",
+          image: "assets/fotos/m4-p12.png",
+          imageAlt: "Inspetor entre esmeril de bancada com coifa e visor e furadeira de bancada com proteção na broca",
+          imagePosition: "center 18%",
           alternatives: [
-            { id: "a", text: "Apenas o botão de emergência, se a broca for curta", correct: false },
-            { id: "b", text: "Lubrificação visível, banco giratório e pedal de avanço", correct: false },
-            { id: "c", text: "Proteção das correias e polias, emergência tipo cogumelo e proteção acrílica na broca", correct: true },
-            { id: "d", text: "Somente o visor da broca, porque a correia fica fora do alcance", correct: false }
+            { id: "a", text: "Esmeril com rebolo exposto; furadeira só com botão de emergência, se a broca for curta", correct: false },
+            { id: "b", text: "Só visor na furadeira, porque a correia e o rebolo ficam fora do alcance", correct: false },
+            { id: "c", text: "Esmeril com coifa no rebolo e visor de policarbonato; furadeira com proteção das correias, cogumelo de emergência e proteção acrílica na broca", correct: true },
+            { id: "d", text: "Lubrificação visível, banco giratório e pedal de avanço nos dois equipamentos", correct: false }
           ],
-          explanation: "O trio é: proteção fixa nas correias e polias, botão de emergência tipo cogumelo ao alcance e proteção acrílica regulável na broca.",
-          review: "O trio de proteção da furadeira de bancada",
-          transcript: "Pergunta 2 do módulo 4."
+          explanation: "O esmeril exige coifa ao redor do rebolo e visor de policarbonato contra fagulhas. A furadeira exige o trio: proteção das correias e polias, emergência tipo cogumelo ao alcance e proteção acrílica regulável na broca.",
+          review: "As proteções do esmeril e da furadeira de bancada",
+          transcript: "Pergunta 2 do módulo 4 — vídeo 2."
         },
         {
           id: "m4-q3",
           type: "question",
-          question: "Qual anexo da NR-12 define conteúdo, carga horária e regras da capacitação?",
+          question: "O que a NR-12 exige nas prensas mecânicas e nas roscas transportadoras?",
+          image: "assets/fotos/m4-p13.png",
+          imageAlt: "Inspetor entre prensa mecânica enclausurada com grades amarelas e rosca transportadora com tampa fechada",
+          imagePosition: "center 18%",
           alternatives: [
-            { id: "a", text: "Anexo I — sistemas optoeletrônicos", correct: false },
-            { id: "b", text: "Anexo II — capacitação e treinamento", correct: true },
-            { id: "c", text: "Anexo IV — glossário de termos técnicos", correct: false },
-            { id: "d", text: "Anexo VIII — prensas e equipamentos similares", correct: false }
+            { id: "a", text: "Volante e engrenagens visíveis na prensa; tampa da rosca pode ficar aberta se o operador for experiente", correct: false },
+            { id: "b", text: "Enclausuramento perimetral com grades intertravadas na prensa; tampas fixas ou intertravadas na rosca", correct: true },
+            { id: "c", text: "Sinalização amarela basta, se a máquina tiver menos de dois metros", correct: false },
+            { id: "d", text: "A tampa da rosca pode ficar aberta no setup, desde que sinalizada", correct: false }
           ],
-          explanation: "O Anexo II trata da capacitação. O I cobre cortinas de luz e distâncias; o IV é o glossário; o VIII é setorial de prensas.",
-          review: "A função do Anexo II da NR-12",
-          transcript: "Pergunta 3 do módulo 4."
+          explanation: "A prensa adequada tem estrutura perimetral de telas e grades amarelas intertravadas. Na rosca helicoidal, tampa aberta sem intertravamento gera risco grave de amputação ou arrasto — as tampas devem ser fixas ou intertravadas.",
+          review: "O enclausuramento de prensas e roscas transportadoras",
+          transcript: "Pergunta 3 do módulo 4 — vídeo 3."
         },
         {
           id: "m4-q4",
           type: "question",
-          question: "Uma tampa aberta, sem intertravamento, em rosca transportadora helicoidal:",
+          question: "Qual anexo geral da NR-12 define conteúdo, carga horária e regras da capacitação?",
+          image: "assets/fotos/m4-p14.png",
+          imageAlt: "Instrutor capacitando operadores ao lado da máquina, com painel de EPIs e material de treinamento",
+          imagePosition: "center 18%",
           alternatives: [
-            { id: "a", text: "É aceitável se o operador for experiente", correct: false },
-            { id: "b", text: "Só reprova se a rosca tiver mais de dois metros", correct: false },
-            { id: "c", text: "Pode ficar aberta durante o setup, desde que sinalizada", correct: false },
-            { id: "d", text: "Reprova a inspeção — há risco grave de amputação ou arrasto", correct: true }
+            { id: "a", text: "Anexo I — sistemas optoeletrônicos e distâncias de segurança", correct: false },
+            { id: "b", text: "Anexo II — capacitação e treinamento", correct: true },
+            { id: "c", text: "Anexo III — meios de acesso permanentes", correct: false },
+            { id: "d", text: "Anexo IV — glossário de termos técnicos", correct: false }
           ],
-          explanation: "Fresta ou tampa aberta sem intertravamento permite contato com o fuso em rotação. Tampas de transportadores contínuos devem ser fixas ou intertravadas.",
-          review: "A proteção das roscas transportadoras",
+          explanation: "O Anexo I trata de cortinas de luz, detectores de presença e distâncias. O II define a capacitação. O III detalha escadas, rampas e passarelas. O IV é o glossário oficial.",
+          review: "A função dos Anexos I a IV da NR-12",
           transcript: "Pergunta 4 — fim do módulo 4."
         },
         {
