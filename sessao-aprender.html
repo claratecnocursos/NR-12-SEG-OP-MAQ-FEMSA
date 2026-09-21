@@ -6,7 +6,7 @@
   <meta name="referrer" content="no-referrer">
   <title>NR-12 — Segurança no Trabalho em Máquinas e Equipamentos</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=femsa-blue41">
+  <link rel="stylesheet" href="question-screen.css?v=femsa-blue42">
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; }
   </style>
@@ -147,7 +147,7 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=nr12-45"></script>
+  <script src="question-screen-data.js?v=nr12-48"></script>
   <script src="question-screen.js?v=mob53"></script>
   <script src="narration-text.js?v=nr12-6"></script>
   <script src="narration.js?v=mob40"></script>
@@ -810,7 +810,7 @@
       ? 'Treinamento concluído'
       : 'Você está aqui';
     var lead = allDone
-      ? 'Você finalizou os módulos. Toque para revisar o Módulo 1.'
+      ? ('Você finalizou os módulos. Toque para revisar o Módulo ' + m.id + '.')
       : 'Um módulo por vez. Ao concluir, o próximo é liberado.';
     var dots = modules.map(function (_, idx) {
       var cls = 'qs-mod-dot';
@@ -830,7 +830,6 @@
           '</div>' +
           '<h2 class="qs-mod-title">' + m.title + '</h2>' +
           (m.objective ? '<p class="qs-mod-goal">' + m.objective + '</p>' : '') +
-          (m.meta ? '<p class="qs-mod-meta">' + m.meta + '</p>' : '') +
           '<button type="button" class="qs-mod-start" data-mod="' + i + '">' + cta + '</button>' +
         '</article>' +
         '<div class="qs-mod-dots" aria-hidden="true">' + dots + '</div>' +
@@ -1455,18 +1454,22 @@
     agendar();
   })();
 
-  /* No celular não dá para digitar qa1010, então cinco toques na logo fazem o
-     mesmo. Vale nas duas logos: a da abertura e a da barra dos módulos. A
-     contagem zera sozinha se houver pausa longa, para cliques avulsos ao
-     longo do treinamento não irem se somando até ligar a simulação sozinha. */
+  /* No celular não dá para digitar qa1010, então três toques na logo da
+     TecnoCursos (canto superior esquerdo) ligam o modo simulação. Vale na
+     abertura e na barra dos módulos. A contagem zera se houver pausa longa,
+     para toques avulsos não irem se somando. */
   (function initLogoShortcut() {
-    var TOQUES = 5;
-    var PAUSA = 1200;
+    var TOQUES = 3;
+    var PAUSA = 1400;
     var conta = 0;
     var ultimo = 0;
+    var lastFire = 0;
 
-    function toque() {
+    function toque(e) {
+      if (e && e.cancelable) e.preventDefault();
       var agora = Date.now();
+      if (agora - lastFire < 90) return;
+      lastFire = agora;
       conta = (agora - ultimo > PAUSA) ? 1 : conta + 1;
       ultimo = agora;
       if (conta < TOQUES) return;
@@ -1474,9 +1477,10 @@
       toggleDemoMode();
     }
 
-    var logos = document.querySelectorAll('.qs-home-logo img, .qs-brand img');
-    Array.prototype.forEach.call(logos, function (el) {
+    var alvos = document.querySelectorAll('.qs-home-logo, .qs-brand');
+    Array.prototype.forEach.call(alvos, function (el) {
       el.addEventListener('click', toque);
+      el.addEventListener('touchend', toque, { passive: false });
     });
   })();
 

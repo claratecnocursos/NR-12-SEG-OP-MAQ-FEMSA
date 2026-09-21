@@ -90,8 +90,9 @@
   z-index: 4;
   background: transparent;
   border-radius: 0;
-  padding: 0;
+  padding: 8px 10px 8px 0;
   box-shadow: none;
+  cursor: pointer;
 }
 .qs-home-logo img { height: 44px; width: auto; display: block; }
 
@@ -499,10 +500,12 @@
   display: flex;
   align-items: center;
   gap: 0;
-  min-width: 0;
+  min-width: 44px;
+  min-height: 44px;
   flex: 0 0 auto;
   margin: 0;
-  padding: 0;
+  padding: 4px 8px 4px 0;
+  cursor: pointer;
 }
 
 .qs-brand img {
@@ -513,7 +516,7 @@
   opacity: 0.95;
 }
 
-/* Cinco toques na logo ligam o modo simulação. Sem isto o celular entende a
+/* Três toques na logo ligam o modo simulação. Sem isto o celular entende a
    sequência como duplo toque para dar zoom e come parte dos toques. */
 .qs-home-logo img,
 .qs-brand img {

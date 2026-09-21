@@ -17,7 +17,6 @@ window.QUESTION_SCREEN_SESSION = {
       id: 1,
       title: "Fundamentos da NR-12, Escopo e Mapeamento de Zonas de Perigo",
       objective: "Compreender a fundamentação legal da NR-12, a aplicabilidade e o mapeamento de zonas de perigo.",
-      meta: "5 vídeos + ícones · 4 perguntas no final",
       titleUnlock: {
         title: "MAPEADOR DE PERIGO",
         body: "Você já reconhece o alcance da NR-12 e sabe identificar zonas de perigo.",
@@ -227,7 +226,6 @@ window.QUESTION_SCREEN_SESSION = {
       id: 2,
       title: "Proteções de Máquinas, Sistemas de Intertravamento e Meios de Acesso",
       objective: "Especificar e inspecionar barreiras físicas, intertravamento, rearme e meios de acesso permanentes.",
-      meta: "6 vídeos + ícones · inspeção no final",
       titleUnlock: {
         title: "GUARDIÃO DAS PROTEÇÕES",
         body: "Você especifica e inspeciona barreiras físicas, intertravamento, rearme e meios de acesso.",
@@ -473,7 +471,6 @@ window.QUESTION_SCREEN_SESSION = {
       id: 3,
       title: "Intervenções Seguras, Bloqueio de Energias (LOTO) e Permissão de Trabalho",
       objective: "Aplicar protocolos de manutenção, LOTO e Permissão de Trabalho na desenergização segura.",
-      meta: "Vídeos + conteúdo · 3 V/F no final",
       titleUnlock: {
         title: "GUARDIÃO DO LOTO",
         body: "Você executa ou audita intervenções com energia zero, bloqueio, etiquetagem e Permissão de Trabalho.",
@@ -654,7 +651,6 @@ window.QUESTION_SCREEN_SESSION = {
       id: 4,
       title: "Diagnóstico Prático no Chão de Fábrica, Anexos Setoriais e Conscientização",
       objective: "Auditar máquinas no chão de fábrica, consultar os Anexos da NR-12 e fortalecer a cultura preventiva.",
-      meta: "Vídeos + conteúdo · ordenar a rotina no final",
       titleUnlock: {
         title: "AUDITOR DO CHÃO DE FÁBRICA",
         body: "Você identifica conformidade, consulta o anexo certo e multiplica a cultura de segurança.",
@@ -670,235 +666,171 @@ window.QUESTION_SCREEN_SESSION = {
           transcript: "Módulo 4: diagnóstico prático no chão de fábrica, anexos setoriais e conscientização."
         },
         {
-          id: "m4-v-monitor",
+          id: "m4-v-serra",
           type: "video",
-          kicker: "🎥 Vídeo 1 de 3",
-          title: "Posicionamento do monitor",
-          duration: "0:35",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=92df051d-fe73-45f1-a8c9-395f690a41d2",
-          playerId: "panda-92df051d-fe73-45f1-a8c9-395f690a41d2",
-          scene: "Cena a filmar na retaguarda administrativa",
-          brief: "Demonstrar o monitor paralelo à janela lateral — nunca de frente nem de costas — para evitar reflexo e ofuscamento.",
-          transcript: "Vídeo: posicionamento do monitor."
+          kicker: "🎥 Vídeo 1",
+          title: "Inspeção Prática: Serra Circular e Torno Paralelo",
+          duration: "1:00",
+          scene: "Comparativo: serra de bancada desprotegida versus protegida; torno antigo livre versus torno com proteção deslizante móvel",
+          brief: "Serra: lâmina e correia expostas versus proteção fixa superior e motor enclausurado. Torno: eixão livre versus proteção móvel transparente com intertravamento.",
+          transcript: "Vídeo: inspeção prática de serra circular e torno paralelo."
         },
         {
-          id: "m4-v-olhos",
+          id: "m4-v-esmeril",
           type: "video",
-          kicker: "🎥 Vídeo 2 de 3",
-          title: "Cuidado com os olhos e pausas visuais",
-          duration: "0:35",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=0d5766c7-bcdf-415c-980a-ab75b51342a3",
-          playerId: "panda-0d5766c7-bcdf-415c-980a-ab75b51342a3",
-          scene: "Cena a filmar na retaguarda administrativa",
-          brief: "Uso prolongado da tela resseca os olhos. Piscar com frequência e, nas pausas, olhar para um ponto a mais de 6 metros.",
-          transcript: "Vídeo: pausas visuais."
+          kicker: "🎥 Vídeo 2",
+          title: "Inspeção Prática: Esmeril e Furadeira de Bancada",
+          duration: "1:00",
+          scene: "Esmeril sem proteção do rebolo versus coifa e visor; furadeira com emergência, proteção de correia e visor da broca",
+          brief: "Esmeril: coifa no rebolo e visor de policarbonato. Furadeira: proteção das correias, botão de emergência tipo cogumelo e proteção acrílica na broca.",
+          transcript: "Vídeo: inspeção prática de esmeril e furadeira de bancada."
         },
         {
-          id: "m4-v-temp",
+          id: "m4-v-prensas",
           type: "video",
-          kicker: "🎥 Vídeo 3 de 3",
-          title: "Temperatura ideal do posto",
-          duration: "0:25",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=824e4bd6-566b-461d-abf2-33b7c62f6dc5",
-          playerId: "panda-824e4bd6-566b-461d-abf2-33b7c62f6dc5",
-          scene: "Cena a filmar no posto administrativo",
-          brief: "Faixa de conforto 18–25 °C. O ar-condicionado não deve incidir direto sobre o colaborador.",
-          transcript: "Vídeo: temperatura do posto."
+          kicker: "🎥 Vídeo 3",
+          title: "Inspeção Prática: Prensas Mecânicas e Roscas Transportadoras",
+          duration: "1:00",
+          scene: "Prensa com volante e engrenagens abertas versus grades amarelas enclausuradas; rosca helicoidal com tampa aberta",
+          brief: "Prensa: enclausuramento perimetral com telas intertravadas. Rosca transportadora: tampas fixas ou intertravadas por chave de segurança.",
+          transcript: "Vídeo: inspeção prática de prensas mecânicas e roscas transportadoras."
         },
         {
-          id: "m4-reflexao",
-          type: "reflect",
-          kicker: "💭 Reflexão",
-          title: "Uma pausa para pensar",
-          prompt: "Quando foi a última vez que você ajustou a posição do seu monitor?",
-          choices: [
-            { text: "Hoje" },
-            { text: "Essa semana" },
-            { text: "Nem lembro" }
-          ],
-          answer: "Um ajuste de poucos segundos evita horas de desconforto no fim do dia.",
-          transcript: "Reflexão: ajuste do monitor."
+          id: "m4-v-anexos-gerais",
+          type: "video",
+          kicker: "🎥 Vídeo 4",
+          title: "Conhecendo os Anexos Gerais da NR-12 (Anexos I a IV)",
+          duration: "1:00",
+          scene: "Slide Disposição dos Anexos da NR-12, destacando os blocos dos Anexos I ao IV",
+          brief: "Anexo I: optoeletrônicos e distâncias. II: capacitação. III: meios de acesso. IV: glossário de termos técnicos.",
+          transcript: "Vídeo: anexos gerais da NR-12, I a IV."
         },
         {
-          id: "m4-dicas",
+          id: "m4-anexos-gerais",
           type: "content",
-          kicker: "📄 Texto",
-          title: "Dicas rápidas do posto administrativo",
-          items: [
-            { icon: "🪟", text: "Elimine reflexos: janelas paralelas ao monitor, nunca à frente ou atrás." },
-            { icon: "👁️", text: "Olhar muito tempo para a tela reduz o piscar e causa olhos secos — pisque com frequência." },
-            { icon: "🌅", text: "Na pausa, evite o computador e olhe para o horizonte, a mais de 6 metros de distância." },
-            { icon: "🌡️", text: "Temperatura de conforto: 18 a 25 °C — a saída do ar-condicionado não deve incidir direto sobre o colaborador." },
-            { icon: "🔀", text: "Se não for possível redirecionar o ar, reposicione o posto de trabalho." }
+          kicker: "📄 Anexos I a IV",
+          title: "Anexos gerais da NR-12",
+          body: "Além do corpo da norma, quatro anexos aprofundam regras que valem para qualquer setor.",
+          cards: [
+            { icon: "💡", title: "Anexo I", body: "Sistemas optoeletrônicos — cortinas de luz, detectores de presença e tabelas de distâncias de segurança." },
+            { icon: "🎓", title: "Anexo II", body: "Capacitação: conteúdo programático, carga horária e regras de treinamento." },
+            { icon: "🪜", title: "Anexo III", body: "Meios de acesso permanentes: escadas, rampas e passarelas." },
+            { icon: "📖", title: "Anexo IV", body: "Glossário oficial — padroniza os termos técnicos de segurança no Brasil." }
           ],
-          transcript: "Cinco dicas rápidas do posto administrativo."
+          quote: "No próximo vídeo entram os anexos setoriais — as regras exclusivas de cada ramo.",
+          transcript: "Anexos gerais: o I trata de sistemas optoeletrônicos e distâncias; o II, da capacitação; o III, dos meios de acesso; o IV é o glossário oficial."
+        },
+        {
+          id: "m4-v-anexos-setoriais",
+          type: "video",
+          kicker: "🎥 Vídeo 5",
+          title: "Anexos Setoriais da NR-12 (Anexos V a XII)",
+          duration: "1:00",
+          scene: "Slide Anexos da NR-12 com a lista dos Anexos V a XII e ícones dos setores",
+          brief: "V motosserras; VI panificação; VII açougues e bares; VIII prensas; IX injetoras; X calçados; XI agrícolas; XII guindar em altura.",
+          transcript: "Vídeo: anexos setoriais da NR-12, V a XII."
+        },
+        {
+          id: "m4-anexos-setoriais",
+          type: "content",
+          kicker: "📄 Anexos V a XII",
+          title: "Anexos setoriais",
+          body: "Do V ao XII, a NR-12 traz regras exclusivas por ramo — consulte o do seu setor.",
+          cards: [
+            { icon: "🪚", title: "V e VI", body: "Motosserras. Máquinas de panificação e confeitaria." },
+            { icon: "🥩", title: "VII e VIII", body: "Açougues, mercearias, bares e restaurantes. Prensas e equipamentos similares." },
+            { icon: "🧴", title: "IX e X", body: "Injetoras de plástico. Indústria de calçados e afins." },
+            { icon: "🚜", title: "XI e XII", body: "Máquinas agrícolas e florestais. Equipamentos de guindar para trabalho em altura." }
+          ],
+          quote: "O anexo certo do seu setor é o que fecha 100% de conformidade.",
+          transcript: "Anexos setoriais: V motosserras, VI panificação, VII açougues e bares, VIII prensas, IX injetoras, X calçados, XI agrícolas e florestais, XII equipamentos de guindar."
+        },
+        {
+          id: "m4-v-cultura",
+          type: "video",
+          kicker: "🎥 Vídeo 6",
+          title: "Cultura Preventiva e Engajamento de Segurança no Trabalho",
+          duration: "1:00",
+          scene: "Slide final: A Segurança no Trabalho Começa com Cada um de Nós! Tem alguém esperando sua chegada.",
+          brief: "A barreira mais avançada não funciona sem atitude. Inspeção prévia, respeito aos bloqueios e nenhuma burla — alguém espera você em casa.",
+          transcript: "Vídeo: cultura preventiva e encerramento do curso."
         },
         {
           id: "m4-quiz-intro",
           type: "quiz-intro",
-          title: "Ordene a Rotina — Módulo 4",
-          count: 1,
-          minCorrect: 1,
-          icon: "🔢",
-          body: "Toque nos <strong>3 cuidados</strong> do posto administrativo na ordem que faz mais sentido seguir no seu turno. Você tem <strong>40 segundos</strong>. Acerte e ganhe <strong>50 pontos</strong>.",
-          transcript: "Desafio: ordenar a rotina do posto administrativo."
+          title: "Desafio NR-12 — Módulo 4",
+          count: 4,
+          minCorrect: 3,
+          icon: "🏭",
+          transcript: "Desafio final do módulo 4: 4 perguntas."
         },
         {
-          id: "m4-order",
-          type: "order",
-          kicker: "🔢 Atividade",
-          title: "Ordene a rotina",
-          body: "Toque nos cuidados na ordem que você seguiria.",
-          time: 40,
-          items: [
-            { key: "monitor", text: "Posicionar o monitor paralelo à janela", rank: 0 },
-            { key: "olhos", text: "Piscar os olhos e olhar um ponto distante nas pausas", rank: 1 },
-            { key: "temperatura", text: "Verificar se o ar-condicionado não bate direto em você", rank: 2 }
+          id: "m4-q1",
+          type: "question",
+          question: "Na serra circular de bancada conforme a NR-12, o que deve aparecer na inspeção?",
+          alternatives: [
+            { id: "a", text: "Lâmina exposta e correia do motor à mostra, para facilitar a manutenção", correct: false },
+            { id: "b", text: "Proteção fixa superior na lâmina e carcaça do motor totalmente enclausurada", correct: true },
+            { id: "c", text: "Apenas uma faixa amarela no chão, sem barreira física", correct: false },
+            { id: "d", text: "Proteção móvel na lâmina, sem enclausurar o motor", correct: false }
           ],
-          review: "A ordem dos cuidados no posto administrativo",
-          transcript: "Ordene os 3 cuidados do posto administrativo."
-        }
-      ]
-    },
-    {
-      id: 5,
-      title: "Ginástica Laboral e Encerramento",
-      meta: "Vídeos + conteúdo · jogo de associação no final",
-      titleUnlock: {
-        title: "CAMPEÃO DO ALONGAMENTO",
-        body: "Você leva a ginástica laboral para o turno — e cuida do corpo todos os dias.",
-        icon: "🧘"
-      },
-      screens: [
-        {
-          id: "m5-cover",
-          type: "cover",
-          title: "Módulo 5 — Ginástica Laboral",
-          subtitle: "Alongamentos simples para antes, durante e depois do turno.",
-          image: "assets/fotos/m5-p1.png",
-          transcript: "Módulo 5: ginástica laboral."
+          explanation: "O modelo adequado tem proteção fixa superior na lâmina e o motor enclausurado — lâmina e correia expostas reprovam a auditoria.",
+          review: "A conformidade da serra circular de bancada",
+          transcript: "Pergunta 1 do módulo 4."
         },
         {
-          id: "m5-v-maos",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Alongamento: mãos, dedos e punhos",
-          duration: "1:25",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=bd575f56-1d7e-478e-8a88-dab1b17a8dcc",
-          playerId: "panda-bd575f56-1d7e-478e-8a88-dab1b17a8dcc",
-          scene: "Cena a filmar — ginástica laboral",
-          brief: "Fechar a mão firme contra o pulso e abrir os dedos; entrelaçar os dedos e ondular; girar polegares e punhos.",
-          transcript: "Vídeo: alongamento de mãos, dedos e punhos."
-        },
-        {
-          id: "m5-v-bracos",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Alongamento: antebraços e braços",
-          duration: "1:25",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=6bf787f2-779f-4bf6-88de-deb9f33a40e9",
-          playerId: "panda-6bf787f2-779f-4bf6-88de-deb9f33a40e9",
-          scene: "Cena a filmar — ginástica laboral",
-          brief: "Braço esticado, palma para fora, puxando com a outra mão (~20 s cada lado). Cotovelo atrás da cabeça e braços entrelaçados atrás do corpo.",
-          transcript: "Vídeo: alongamento de antebraços e braços."
-        },
-        {
-          id: "m5-v-pescoco",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Cabeça, pescoço, ombros e tronco",
-          duration: "1:15",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=dc6d5dc5-b789-4062-8d71-86e4b7282978",
-          playerId: "panda-dc6d5dc5-b789-4062-8d71-86e4b7282978",
-          scene: "Cena a filmar — ginástica laboral",
-          brief: "Movimentos suaves de sim e não (sem jogar a cabeça para trás), inclinação lateral, elevação e giros de ombro, inclinação lateral do tronco.",
-          transcript: "Vídeo: alongamento de pescoço, ombros e tronco."
-        },
-        {
-          id: "m5-ficha",
-          type: "content",
-          steps: true,
-          kicker: "📄 Texto",
-          title: "Ficha de consulta — sequência de alongamento",
-          items: [
-            { n: 1, title: "Mãos:", text: "fechar contra o pulso e abrir — 3×", image: "assets/fotos/alongamentos/m5-maos.png", imageAlt: "Alongamento de mãos" },
-            { n: 2, title: "Dedos:", text: "entrelaçar e ondular / girar polegares / estender alternado — 3× cada", image: "assets/fotos/alongamentos/m5-dedos.png", imageAlt: "Alongamento de dedos" },
-            { n: 3, title: "Antebraço:", text: "puxar palma para fora — 20 s cada lado, 3×", image: "assets/fotos/alongamentos/m5-antebraco.png", imageAlt: "Alongamento de antebraço" },
-            { n: 4, title: "Punhos:", text: "unir palmas no peito e afastar / girar nos dois sentidos", image: "assets/fotos/alongamentos/m5-punhos.png", imageAlt: "Alongamento de punhos" },
-            { n: 5, title: "Braços:", text: "cotovelo atrás da cabeça — 20 s cada lado, 3×", image: "assets/fotos/alongamentos/m5-bracos.png", imageAlt: "Alongamento de braços" },
-            { n: 6, title: "Braços (atrás do corpo):", text: "dedos entrelaçados, afastar do corpo — 20 s, 3×", image: "assets/fotos/alongamentos/m5-bracos-atras.png", imageAlt: "Alongamento de braços atrás do corpo" },
-            { n: 7, title: "Braços (acima da cabeça):", text: "dedos entrelaçados, palmas para cima — 20 s", image: "assets/fotos/alongamentos/m5-bracos-cima.png", imageAlt: "Alongamento de braços acima da cabeça" },
-            { n: 8, title: "Cabeça/pescoço:", text: "sim/não e inclinação lateral — 20 s cada lado, 3× (evitar levar a cabeça para trás)", image: "assets/fotos/alongamentos/m5-cabeca.png", imageAlt: "Alongamento de cabeça e pescoço" },
-            { n: 9, title: "Ombros:", text: "elevar ao inspirar / girar frente-trás — 3× cada sentido", image: "assets/fotos/alongamentos/m5-ombros.png", imageAlt: "Alongamento de ombros" },
-            { n: 10, title: "Tronco:", text: "braço sobre a cabeça, inclinação lateral — 20 s cada lado, 3×", image: "assets/fotos/alongamentos/m5-tronco.png", imageAlt: "Alongamento de tronco" }
+          id: "m4-q2",
+          type: "question",
+          question: "Na furadeira de bancada, a NR-12 exige este trio de proteção:",
+          alternatives: [
+            { id: "a", text: "Apenas o botão de emergência, se a broca for curta", correct: false },
+            { id: "b", text: "Lubrificação visível, banco giratório e pedal de avanço", correct: false },
+            { id: "c", text: "Proteção das correias e polias, emergência tipo cogumelo e proteção acrílica na broca", correct: true },
+            { id: "d", text: "Somente o visor da broca, porque a correia fica fora do alcance", correct: false }
           ],
-          transcript: "Ficha de consulta dos alongamentos."
+          explanation: "O trio é: proteção fixa nas correias e polias, botão de emergência tipo cogumelo ao alcance e proteção acrílica regulável na broca.",
+          review: "O trio de proteção da furadeira de bancada",
+          transcript: "Pergunta 2 do módulo 4."
         },
         {
-          id: "m5-v-final",
-          type: "video",
-          kicker: "🎥 Vídeo",
-          title: "Efeitos da má postura e mensagem final",
-          duration: "1:05",
-          embed: "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=2d6e8d25-b86c-4841-9930-4bb3c86292d4",
-          playerId: "panda-2d6e8d25-b86c-4841-9930-4bb3c86292d4",
-          scene: "Cena a filmar com o instrutor, encerrando o treinamento",
-          brief: "Instrutor em corredor da loja transmite a mensagem final. Má postura gera dor e pode evoluir para LER/DORT. Pratique os alongamentos e mantenha a postura neutra.",
-          transcript: "Vídeo final: efeitos da má postura."
-        },
-        {
-          id: "m5-quiz-intro",
-          type: "quiz-intro",
-          title: "Desafio NR 17 — Módulo 5",
-          count: 1,
-          minCorrect: 1,
-          icon: "🧩",
-          body: "Associe cada <strong>exercício</strong> à <strong>região do corpo</strong> que ele alonga. São <strong>8 pares</strong> — clique em um exercício e depois na região correspondente. Acerte e ganhe <strong>50 pontos</strong>.",
-          transcript: "Desafio: associar exercícios às regiões do corpo."
-        },
-        {
-          id: "m5-match",
-          type: "match",
-          kicker: "🕹️ Jogo de associação",
-          title: "Associe o exercício à região",
-          pairs: [
-            { ex: "Fechar a mão firme contra o pulso e abrir os dedos", body: "Mãos e dedos" },
-            { ex: "Entrelaçar os dedos e fazer movimento ondulatório", body: "Dedos" },
-            { ex: "Braço esticado, palma para fora, puxando com a outra mão", body: "Antebraço" },
-            { ex: "Unir as palmas no peito e girar os punhos", body: "Punhos" },
-            { ex: "Cotovelo atrás da cabeça, em direção ao ombro oposto", body: "Braço" },
-            { ex: "Braços atrás do corpo, dedos entrelaçados, afastando do corpo", body: "Ombros e peito" },
-            { ex: "Movimento de \"sim\" e \"não\" com a cabeça", body: "Pescoço" },
-            { ex: "Braço sobre a cabeça, inclinando lateralmente", body: "Tronco" }
+          id: "m4-q3",
+          type: "question",
+          question: "Qual anexo da NR-12 define conteúdo, carga horária e regras da capacitação?",
+          alternatives: [
+            { id: "a", text: "Anexo I — sistemas optoeletrônicos", correct: false },
+            { id: "b", text: "Anexo II — capacitação e treinamento", correct: true },
+            { id: "c", text: "Anexo IV — glossário de termos técnicos", correct: false },
+            { id: "d", text: "Anexo VIII — prensas e equipamentos similares", correct: false }
           ],
-          review: "Qual região do corpo cada exercício de alongamento trabalha",
-          transcript: "Jogo: associe 8 exercícios às regiões do corpo."
+          explanation: "O Anexo II trata da capacitação. O I cobre cortinas de luz e distâncias; o IV é o glossário; o VIII é setorial de prensas.",
+          review: "A função do Anexo II da NR-12",
+          transcript: "Pergunta 3 do módulo 4."
         },
         {
-          id: "m5-reflexao",
-          type: "reflect",
-          kicker: "💭 Reflexão",
-          title: "Antes de encerrar",
-          prompt: "Quando você vai praticar esses alongamentos?",
-          choices: [
-            { icon: "🌅", text: "Início do turno" },
-            { icon: "☕", text: "Na pausa" },
-            { icon: "🏠", text: "Antes de casa" }
+          id: "m4-q4",
+          type: "question",
+          question: "Uma tampa aberta, sem intertravamento, em rosca transportadora helicoidal:",
+          alternatives: [
+            { id: "a", text: "É aceitável se o operador for experiente", correct: false },
+            { id: "b", text: "Só reprova se a rosca tiver mais de dois metros", correct: false },
+            { id: "c", text: "Pode ficar aberta durante o setup, desde que sinalizada", correct: false },
+            { id: "d", text: "Reprova a inspeção — há risco grave de amputação ou arrasto", correct: true }
           ],
-          answer: "Não se esqueça de pensar neste assunto todos os dias. Cuidar da sua postura hoje é evitar dores e afastamentos amanhã — pequenos ajustes, repetidos todos os dias, fazem toda a diferença.",
-          transcript: "Antes de encerrar: escolha quando praticar os alongamentos."
+          explanation: "Fresta ou tampa aberta sem intertravamento permite contato com o fuso em rotação. Tampas de transportadores contínuos devem ser fixas ou intertravadas.",
+          review: "A proteção das roscas transportadoras",
+          transcript: "Pergunta 4 — fim do módulo 4."
         },
         {
-          id: "m5-done",
+          id: "m4-done",
           type: "finale",
           kicker: "🏆 Conclusão",
-          eyebrow: "Certificado de conclusão",
+          eyebrow: "Treinamento concluído",
           title: "Parabéns",
-          body: "Você concluiu o treinamento NR 17 — Ergonomia no Comércio e na Logística.",
-          quote: "Cuidar da sua postura hoje é proteger a sua energia amanhã. Leve esses cuidados para cada turno — seu corpo agradece.",
-          chips: ["NR 17", "Ergonomia", "Comércio e Logística"],
+          body: "Você concluiu o treinamento NR-12 — Segurança no Trabalho em Máquinas e Equipamentos.",
+          quote: "A segurança no trabalho começa com cada um de nós. Tem alguém esperando a sua chegada.",
+          chips: ["NR-12", "Auditoria", "Cultura preventiva"],
           image: "assets/fotos/capafinal.png",
-          transcript: "Parabéns pela conclusão do treinamento. Cuidar da sua postura hoje é proteger a sua energia amanhã."
+          transcript: "Parabéns pela conclusão do treinamento. A segurança no trabalho começa com cada um de nós."
         }
       ]
     }
